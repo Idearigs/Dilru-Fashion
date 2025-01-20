@@ -4,16 +4,16 @@
             <div class="row">
                 <div class="col-auto align-self-center">
                     <div class="header-logo">
-                        <a href="index.html"><img src="assets/images/logo/logo.png" alt="Site Logo" /></a>
+                        <a href="{{Route('Frontend-Home')}}"><img src="assets/images/logo/logo.png" alt="Site Logo" /></a>
                     </div>
                 </div>
                 <div class="col align-self-center d-none d-lg-block">
                     <div class="main-menu">
                         <ul>
-                            <li><a href="/">Home</a></li>
+                            <li><a href="{{Route('Frontend-Home')}}">Home</a></li>
 
-                            <li><a href="/about">About us</a></li>
-                            <li><a href="/contact">Contact us</a></li>
+                            <li><a href="{{Route('Frontend-AboutUs')}}">About us</a></li>
+                            <li><a href="{{Route('Frontend-ContactUs')}}">Contact us</a></li>
                         </ul>
                     </div>
                 </div>

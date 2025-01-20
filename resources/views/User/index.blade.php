@@ -35,7 +35,7 @@
 <!-- Top Bar -->
 
 
-@include('navbar')
+@include('partials.navbar')
 <!-- Top Bar -->
 <!-- Header Area Start -->
 
@@ -52,28 +52,28 @@
         <div class="body customScroll">
             <ul class="minicart-product-list">
                 <li>
-                    <a href="single-product.html" class="image"><img src="assets/images/product-image/1.jpg"
+                    <a href="{{Route('Frontend-ProductDetail')}}l" class="image"><img src="assets/images/product-image/1.jpg"
                                                                      alt="Cart product Image"></a>
                     <div class="content">
-                        <a href="single-product.html" class="title">Women's Elizabeth Coat</a>
+                        <a href="{{Route('Frontend-ProductDetail')}}l" class="title">Women's Elizabeth Coat</a>
                         <span class="quantity-price">1 x <span class="amount">$21.86</span></span>
                         <a href="#" class="remove">×</a>
                     </div>
                 </li>
                 <li>
-                    <a href="single-product.html" class="image"><img src="assets/images/product-image/2.jpg"
+                    <a href="{{Route('Frontend-ProductDetail')}}l" class="image"><img src="assets/images/product-image/2.jpg"
                                                                      alt="Cart product Image"></a>
                     <div class="content">
-                        <a href="single-product.html" class="title">Long sleeve knee length</a>
+                        <a href="{{Route('Frontend-ProductDetail')}}l" class="title">Long sleeve knee length</a>
                         <span class="quantity-price">1 x <span class="amount">$13.28</span></span>
                         <a href="#" class="remove">×</a>
                     </div>
                 </li>
                 <li>
-                    <a href="single-product.html" class="image"><img src="assets/images/product-image/3.jpg"
+                    <a href="{{Route('Frontend-ProductDetail')}}l" class="image"><img src="assets/images/product-image/3.jpg"
                                                                      alt="Cart product Image"></a>
                     <div class="content">
-                        <a href="single-product.html" class="title">Cool Man Wearing Leather</a>
+                        <a href="{{Route('Frontend-ProductDetail')}}l" class="title">Cool Man Wearing Leather</a>
                         <span class="quantity-price">1 x <span class="amount">$17.34</span></span>
                         <a href="#" class="remove">×</a>
                     </div>
@@ -98,28 +98,28 @@
         <div class="body customScroll">
             <ul class="minicart-product-list">
                 <li>
-                    <a href="single-product.html" class="image"><img src="assets/images/product-image/1.jpg"
+                    <a href="{{Route('Frontend-ProductDetail')}}l" class="image"><img src="assets/images/product-image/1.jpg"
                                                                      alt="Cart product Image"></a>
                     <div class="content">
-                        <a href="single-product.html" class="title">Women's Elizabeth Coat</a>
+                        <a href="{{Route('Frontend-ProductDetail')}}l" class="title">Women's Elizabeth Coat</a>
                         <span class="quantity-price">1 x <span class="amount">$18.86</span></span>
                         <a href="#" class="remove">×</a>
                     </div>
                 </li>
                 <li>
-                    <a href="single-product.html" class="image"><img src="assets/images/product-image/2.jpg"
+                    <a href="{{Route('Frontend-ProductDetail')}}l" class="image"><img src="assets/images/product-image/2.jpg"
                                                                      alt="Cart product Image"></a>
                     <div class="content">
-                        <a href="single-product.html" class="title">Long sleeve knee length</a>
+                        <a href="{{Route('Frontend-ProductDetail')}}l" class="title">Long sleeve knee length</a>
                         <span class="quantity-price">1 x <span class="amount">$43.28</span></span>
                         <a href="#" class="remove">×</a>
                     </div>
                 </li>
                 <li>
-                    <a href="single-product.html" class="image"><img src="assets/images/product-image/3.jpg"
+                    <a href="{{Route('Frontend-ProductDetail')}}l" class="image"><img src="assets/images/product-image/3.jpg"
                                                                      alt="Cart product Image"></a>
                     <div class="content">
-                        <a href="single-product.html" class="title">Cool Man Wearing Leather</a>
+                        <a href="{{Route('Frontend-ProductDetail')}}l" class="title">Cool Man Wearing Leather</a>
                         <span class="quantity-price">1 x <span class="amount">$37.34</span></span>
                         <a href="#" class="remove">×</a>
                     </div>
@@ -128,8 +128,8 @@
         </div>
         <div class="foot">
             <div class="buttons mt-30px">
-                <a href="cart.html" class="btn btn-dark btn-hover-primary mb-30px">view cart</a>
-                <a href="checkout.html" class="btn btn-outline-dark current-btn">checkout</a>
+                <a href="{{Route('Frontend-Cart')}}" class="btn btn-dark btn-hover-primary mb-30px">view cart</a>
+                <a href="{{Route('Frontend-Checkoutpage')}}" class="btn btn-outline-dark current-btn">checkout</a>
             </div>
         </div>
     </div>
@@ -167,7 +167,7 @@
                         <li>
                             <a href="#"><span class="menu-text">product Details Page</span></a>
                             <ul class="sub-menu">
-                                <li><a href="single-product.html">Product Single</a></li>
+                                <li><a href="{{Route('Frontend-ProductDetail')}}l">Product Single</a></li>
                                 <li><a href="single-product-variable.html">Product Variable</a></li>
                                 <li><a href="single-product-affiliate.html">Product Affiliate</a></li>
                                 <li><a href="single-product-group.html">Product Group</a></li>
@@ -335,43 +335,11 @@
 <!-- Hero/Intro Slider End -->
 
 <!-- Banner Area Start -->
-<div class="banner-area pt-100px pb-100px">
-    <div class="container">
-        <div class="row">
-            <div class="single-col">
-                <a href="shop-left-sidebar.html" class="single-banner">
-                    <img src="assets/images/banner/1.jpg" alt="">
-                    <div class="item-disc">
-                        <span class="item-title">Women</span>
-                        <span class="item-amount">16 items</span>
-                    </div>
-                </a>
-            </div>
-            <div class="single-col center-col">
-                <div class="single-banner">
-                    <img src="assets/images/banner/2.jpg" alt="">
-                    <div class="item-disc">
-                        <h2 class="title">#bestsellers</h2>
-                        <a href="shop-left-sidebar.html" class="shop-link">Shop Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="single-col">
-                <a href="shop-left-sidebar.html" class="single-banner">
-                    <img src="assets/images/banner/3.jpg" alt="">
-                    <div class="item-disc">
-                        <span class="item-title">Nomen</span>
-                        <span class="item-amount">16 items</span>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
+
 <!-- Banner Area End -->
 
 <!-- Feature Area Srart -->
-<div class="feature-area pb-100px">
+<div class="feature-area pb-100px " style="margin-top:50px;">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-6  ">
@@ -458,7 +426,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}" class="image">
                                             <img src="assets/images/product-image/1.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/2.jpg"
                                                  alt="Product" />
@@ -485,7 +453,7 @@
                                                 </span>
                                                 <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Women's Elizabeth Coat
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Women's Elizabeth Coat
                                             </a>
                                         </h5>
                                         <span class="price">
@@ -499,7 +467,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/3.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/4.jpg"
                                                  alt="Product" />
@@ -527,7 +495,7 @@
                                                 </span>
                                                 <span class="rating-num">( 4 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Ardene Microfiber
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Ardene Microfiber
                                                 Tights</a>
                                         </h5>
                                         <span class="price">
@@ -543,7 +511,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/5.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/6.jpg"
                                                  alt="Product" />
@@ -570,7 +538,7 @@
                                                 </span>
                                                 <span class="rating-num">( 4.5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Women's Long Sleeve
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Women's Long Sleeve
                                                 Shirts</a></h5>
                                         <span class="price">
                                                 <span class="new">$30.50</span>
@@ -584,7 +552,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/7.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/8.jpg"
                                                  alt="Product" />
@@ -611,7 +579,7 @@
                                                 </span>
                                                 <span class="rating-num">( 3.5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Parrera Sunglasses -
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Parrera Sunglasses -
                                                 Lomashop</a></h5>
                                         <span class="price">
                                                 <span class="new">$38.50</span>
@@ -625,7 +593,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/2.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/10.jpg"
                                                  alt="Product" />
@@ -653,7 +621,7 @@
                                                 </span>
                                                 <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Cool Man Wearing
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Cool Man Wearing
                                                 Leather</a></h5>
                                         <span class="price">
                                                 <span class="new">$38.50</span>
@@ -667,7 +635,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/4.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/12.jpg"
                                                  alt="Product" />
@@ -693,7 +661,7 @@
                                                 </span>
                                                 <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Portrait Of A Young
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Portrait Of A Young
                                                 Stylish</a>
                                         </h5>
                                         <span class="price">
@@ -708,7 +676,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/6.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/14.jpg"
                                                  alt="Product" />
@@ -734,7 +702,7 @@
                                                 </span>
                                                 <span class="rating-num">( 4 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Men's Fashion Leather
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Men's Fashion Leather
                                                 Bag</a></h5>
                                         <span class="price">
                                                 <span class="new">$30.50</span>
@@ -747,7 +715,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/8.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/16.jpg"
                                                  alt="Product" />
@@ -774,7 +742,7 @@
                                                 </span>
                                                 <span class="rating-num">( 3 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Long sleeve knee
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Long sleeve knee
                                                 length</a></h5>
                                         <span class="price">
                                                 <span class="new">$38.50</span>
@@ -794,7 +762,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/1.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/2.jpg"
                                                  alt="Product" />
@@ -821,7 +789,7 @@
                                                 </span>
                                                 <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Women's Elizabeth Coat
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Women's Elizabeth Coat
                                             </a>
                                         </h5>
                                         <span class="price">
@@ -835,7 +803,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/3.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/4.jpg"
                                                  alt="Product" />
@@ -863,7 +831,7 @@
                                                 </span>
                                                 <span class="rating-num">( 4 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Ardene Microfiber
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Ardene Microfiber
                                                 Tights</a>
                                         </h5>
                                         <span class="price">
@@ -879,7 +847,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/5.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/6.jpg"
                                                  alt="Product" />
@@ -906,7 +874,7 @@
                                                 </span>
                                                 <span class="rating-num">( 4.5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Women's Long Sleeve
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Women's Long Sleeve
                                                 Shirts</a></h5>
                                         <span class="price">
                                                 <span class="new">$30.50</span>
@@ -920,7 +888,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/7.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/8.jpg"
                                                  alt="Product" />
@@ -947,7 +915,7 @@
                                                 </span>
                                                 <span class="rating-num">( 3.5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Parrera Sunglasses -
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Parrera Sunglasses -
                                                 Lomashop</a></h5>
                                         <span class="price">
                                                 <span class="new">$38.50</span>
@@ -961,7 +929,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/2.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/10.jpg"
                                                  alt="Product" />
@@ -989,7 +957,7 @@
                                                 </span>
                                                 <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Cool Man Wearing
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Cool Man Wearing
                                                 Leather</a></h5>
                                         <span class="price">
                                                 <span class="new">$38.50</span>
@@ -1003,7 +971,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/4.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/12.jpg"
                                                  alt="Product" />
@@ -1029,7 +997,7 @@
                                                 </span>
                                                 <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Portrait Of A Young
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Portrait Of A Young
                                                 Stylish</a>
                                         </h5>
                                         <span class="price">
@@ -1044,7 +1012,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/6.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/14.jpg"
                                                  alt="Product" />
@@ -1070,7 +1038,7 @@
                                                 </span>
                                                 <span class="rating-num">( 4 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Men's Fashion Leather
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Men's Fashion Leather
                                                 Bag</a></h5>
                                         <span class="price">
                                                 <span class="new">$30.50</span>
@@ -1083,7 +1051,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/8.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/16.jpg"
                                                  alt="Product" />
@@ -1110,7 +1078,7 @@
                                                 </span>
                                                 <span class="rating-num">( 3 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Long sleeve knee
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Long sleeve knee
                                                 length</a></h5>
                                         <span class="price">
                                                 <span class="new">$38.50</span>
@@ -1130,7 +1098,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/1.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/2.jpg"
                                                  alt="Product" />
@@ -1157,7 +1125,7 @@
                                                 </span>
                                                 <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Women's Elizabeth Coat
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Women's Elizabeth Coat
                                             </a>
                                         </h5>
                                         <span class="price">
@@ -1171,7 +1139,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/3.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/4.jpg"
                                                  alt="Product" />
@@ -1199,7 +1167,7 @@
                                                 </span>
                                                 <span class="rating-num">( 4 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Ardene Microfiber
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Ardene Microfiber
                                                 Tights</a>
                                         </h5>
                                         <span class="price">
@@ -1215,7 +1183,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/5.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/6.jpg"
                                                  alt="Product" />
@@ -1242,7 +1210,7 @@
                                                 </span>
                                                 <span class="rating-num">( 4.5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Women's Long Sleeve
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Women's Long Sleeve
                                                 Shirts</a></h5>
                                         <span class="price">
                                                 <span class="new">$30.50</span>
@@ -1256,7 +1224,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/7.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/8.jpg"
                                                  alt="Product" />
@@ -1283,7 +1251,7 @@
                                                 </span>
                                                 <span class="rating-num">( 3.5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Parrera Sunglasses -
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Parrera Sunglasses -
                                                 Lomashop</a></h5>
                                         <span class="price">
                                                 <span class="new">$38.50</span>
@@ -1297,7 +1265,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/2.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/10.jpg"
                                                  alt="Product" />
@@ -1325,7 +1293,7 @@
                                                 </span>
                                                 <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Cool Man Wearing
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Cool Man Wearing
                                                 Leather</a></h5>
                                         <span class="price">
                                                 <span class="new">$38.50</span>
@@ -1339,7 +1307,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/4.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/12.jpg"
                                                  alt="Product" />
@@ -1365,7 +1333,7 @@
                                                 </span>
                                                 <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Portrait Of A Young
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Portrait Of A Young
                                                 Stylish</a>
                                         </h5>
                                         <span class="price">
@@ -1380,7 +1348,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/6.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/14.jpg"
                                                  alt="Product" />
@@ -1406,7 +1374,7 @@
                                                 </span>
                                                 <span class="rating-num">( 4 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Men's Fashion Leather
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Men's Fashion Leather
                                                 Bag</a></h5>
                                         <span class="price">
                                                 <span class="new">$30.50</span>
@@ -1419,7 +1387,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/8.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/16.jpg"
                                                  alt="Product" />
@@ -1446,7 +1414,7 @@
                                                 </span>
                                                 <span class="rating-num">( 3 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Long sleeve knee
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Long sleeve knee
                                                 length</a></h5>
                                         <span class="price">
                                                 <span class="new">$38.50</span>
@@ -1466,7 +1434,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/1.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/2.jpg"
                                                  alt="Product" />
@@ -1493,7 +1461,7 @@
                                                 </span>
                                                 <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Women's Elizabeth Coat
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Women's Elizabeth Coat
                                             </a>
                                         </h5>
                                         <span class="price">
@@ -1507,7 +1475,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/3.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/4.jpg"
                                                  alt="Product" />
@@ -1535,7 +1503,7 @@
                                                 </span>
                                                 <span class="rating-num">( 4 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Ardene Microfiber
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Ardene Microfiber
                                                 Tights</a>
                                         </h5>
                                         <span class="price">
@@ -1551,7 +1519,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/5.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/6.jpg"
                                                  alt="Product" />
@@ -1578,7 +1546,7 @@
                                                 </span>
                                                 <span class="rating-num">( 4.5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Women's Long Sleeve
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Women's Long Sleeve
                                                 Shirts</a></h5>
                                         <span class="price">
                                                 <span class="new">$30.50</span>
@@ -1592,7 +1560,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/7.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/8.jpg"
                                                  alt="Product" />
@@ -1619,7 +1587,7 @@
                                                 </span>
                                                 <span class="rating-num">( 3.5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Parrera Sunglasses -
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Parrera Sunglasses -
                                                 Lomashop</a></h5>
                                         <span class="price">
                                                 <span class="new">$38.50</span>
@@ -1633,7 +1601,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/2.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/10.jpg"
                                                  alt="Product" />
@@ -1661,7 +1629,7 @@
                                                 </span>
                                                 <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Cool Man Wearing
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Cool Man Wearing
                                                 Leather</a></h5>
                                         <span class="price">
                                                 <span class="new">$38.50</span>
@@ -1675,7 +1643,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/4.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/12.jpg"
                                                  alt="Product" />
@@ -1701,7 +1669,7 @@
                                                 </span>
                                                 <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Portrait Of A Young
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Portrait Of A Young
                                                 Stylish</a>
                                         </h5>
                                         <span class="price">
@@ -1716,7 +1684,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/6.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/14.jpg"
                                                  alt="Product" />
@@ -1742,7 +1710,7 @@
                                                 </span>
                                                 <span class="rating-num">( 4 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Men's Fashion Leather
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Men's Fashion Leather
                                                 Bag</a></h5>
                                         <span class="price">
                                                 <span class="new">$30.50</span>
@@ -1755,7 +1723,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="single-product.html" class="image">
+                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
                                             <img src="assets/images/product-image/8.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/16.jpg"
                                                  alt="Product" />
@@ -1782,7 +1750,7 @@
                                                 </span>
                                                 <span class="rating-num">( 3 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="single-product.html">Long sleeve knee
+                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Long sleeve knee
                                                 length</a></h5>
                                         <span class="price">
                                                 <span class="new">$38.50</span>
@@ -1802,33 +1770,11 @@
 <!-- Product Area End -->
 
 <!-- Deal Area Start -->
-<div class="deal-area pb-100px pt-100px">
-    <div class="container ">
-        <div class="row">
-            <div class="col-12">
-                <div class="deal-inner deal-bg position-relative pt-100px pb-100px"
-                     data-bg-image="assets/images/deal-img/deal-bg.jpg">
-                    <div class="deal-wrapper">
-                        <span class="category">#FASHION SHOP</span>
-                        <h3 class="title">Deal Of The Day</h3>
-                        <div class="deal-timing">
-                            <div data-countdown="2023/12/31"></div>
-                        </div>
-                        <a href="single-product-variable.html" class="btn btn-lg btn-primary btn-hover-dark m-auto"> Shop
-                            Now <i class="fa fa-shopping-basket ml-15px" aria-hidden="true"></i></a>
-                    </div>
-                    <div class="deal-image">
-                        <img class="img-fluid" src="assets/images/deal-img/woman.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 <!-- Deal Area End -->
 
 <!-- Testimonial Area Start -->
-<div class="testimonial-area pb-40px">
+<div class="testimonial-area pb-40px" style="margin-top:80px;">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -1979,29 +1925,7 @@
 <!-- Testimonial Area End -->
 
 <!-- Brand area start -->
-<div class="brand-area pb-100px">
-    <div class="container">
-        <div class="brand-slider swiper-container">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide brand-slider-item text-center">
-                    <a href="#"><img class=" img-fluid" src="assets/images/brand-logo/1.png" alt="" /></a>
-                </div>
-                <div class="swiper-slide brand-slider-item text-center">
-                    <a href="#"><img class=" img-fluid" src="assets/images/brand-logo/2.png" alt="" /></a>
-                </div>
-                <div class="swiper-slide brand-slider-item text-center">
-                    <a href="#"><img class=" img-fluid" src="assets/images/brand-logo/3.png" alt="" /></a>
-                </div>
-                <div class="swiper-slide brand-slider-item text-center">
-                    <a href="#"><img class=" img-fluid" src="assets/images/brand-logo/4.png" alt="" /></a>
-                </div>
-                <div class="swiper-slide brand-slider-item text-center">
-                    <a href="#"><img class=" img-fluid" src="assets/images/brand-logo/5.png" alt="" /></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 <!-- Brand area end -->
 
 <!-- Footer Area Start -->
@@ -2349,6 +2273,23 @@
 <script src="{{ asset('assets/js/main.js') }}"></script>
 
 </body>
+<script src="{{ asset('assets/js/vendor/modernizr-3.11.2.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/jquery-migrate-3.3.2.min.js') }}"></script>
+<script src="{{ asset('assets/js/vendor/bootstrap.bundle.min.js') }}"></script>
+
+<!-- Plugins JS -->
+<script src="{{ asset('assets/js/plugins/swiper-bundle.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/jquery.nice-select.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/countdown.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/scrollup.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/jquery.zoom.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/venobox.min.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/ajax-mail.js') }}"></script>
+
+<!-- Main JS -->
+<script src="{{ asset('assets/js/main.js') }}"></script>
 
 
 <!-- Mirrored from htmldemo.net/jesco/jesco/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 02 Dec 2024 06:58:34 GMT -->
