@@ -359,11 +359,43 @@
                         </div>
                         <div class="additional-info-wrap">
                             <h4>Additional information</h4>
+                            <!-- Include Quill.js styles and script -->
+                            <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
+                            <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+
                             <div class="additional-info">
                                 <label>Order notes</label>
-                                <textarea placeholder="Notes about your order, e.g. special notes for delivery. "
-                                    name="message"></textarea>
+
+                                <!-- Quill editor container -->
+                                <div id="quill-editor" style="height: 150px; border: 1px solid #ddd; border-radius: 5px;"></div>
+
+                                <!-- Hidden input to store the HTML content -->
+                                <input type="hidden" name="message" id="message">
                             </div>
+
+                            <!-- Script to initialize Quill.js -->
+                            <script>
+                                // Initialize Quill editor
+                                const quill = new Quill('#quill-editor', {
+                                    theme: 'snow', // Choose 'bubble' for a simpler UI
+                                    placeholder: 'Notes about your order, e.g., special notes for delivery.',
+                                    modules: {
+                                        toolbar: [
+                                            ['bold', 'italic', 'underline'], // Basic text formatting
+                                            [{ 'list': 'ordered' }, { 'list': 'bullet' }], // Lists
+                                            [{ 'align': [] }], // Text alignment
+                                        ]
+                                    }
+                                });
+
+                                // On form submission, store the Quill content in the hidden input
+                                const form = document.querySelector('form'); // Adjust if form ID or class differs
+                                form.onsubmit = () => {
+                                    const messageInput = document.querySelector('#message');
+                                    messageInput.value = quill.root.innerHTML; // Set Quill's HTML content to the hidden input
+                                };
+                            </script>
+
                         </div>
                         <div class="checkout-account mt-25">
                             <input class="checkout-toggle w-auto h-auto" type="checkbox" />
