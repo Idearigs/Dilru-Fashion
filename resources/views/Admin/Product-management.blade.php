@@ -9,7 +9,10 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>Tables | TailAdmin - Tailwind CSS Admin Dashboard Template</title>
+      <meta name="csrf-token" content="{{ csrf_token() }}">
       <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}" />
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
    </head>
    <body
       x-data="{ page: 'tables', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
@@ -55,182 +58,88 @@
                     <button class="add-product-btn" onclick="openModal()">+ Add Product</button>
                 </div>
 
-                <!-- Product Modal -->
-                <div id="productModal" class="modal">
-                    <div class="modal-content">
-                        <span class="close-btn" onclick="closeModal()">&times;</span>
-                        <h3 class="modal-title">Add New Product</h3>
-
-                        <form id="productForm">
-                            <div class="form-group">
-                                <label for="productName">Product Name:</label>
-                                <input type="text" id="productName" placeholder="Enter product name" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="price">Price (LKR):</label>
-                                <input type="number" id="price" placeholder="Enter price" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="stock">Stock:</label>
-                                <input type="number" id="stock" placeholder="Enter stock quantity" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="description">Description:</label>
-                                <textarea id="description" placeholder="Enter product description"></textarea>
-                            </div>
-
-                            <!-- Image Upload -->
-                            <div class="form-group">
-                                <label for="productImage">Product Image:</label>
-                                <input type="file" id="productImage" accept="image/*" onchange="previewImage(event)">
-                                <div class="image-preview" id="imagePreview">
-                                    <p>No image selected</p>
-                                </div>
-                            </div>
-
-                            <button type="submit" class="submit-btn">Add Product</button>
-                        </form>
-                    </div>
-                </div>
-
-
-                <div id="EditProductModal" class="modal">
-                    <div class="modal-content">
-                        <span class="close-btn" onclick="closeEditModal()">&times;</span>
-                        <h3 class="modal-title">Edit Product</h3>
-
-                        <form id="productForm">
-                            <div class="form-group">
-                                <label for="productName">Product Name:</label>
-                                <input type="text" id="productName" placeholder="Enter product name" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="price">Price (LKR):</label>
-                                <input type="number" id="price" placeholder="Enter price" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="stock">Stock:</label>
-                                <input type="number" id="stock" placeholder="Enter stock quantity" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="description">Description:</label>
-                                <textarea id="description" placeholder="Enter product description"></textarea>
-                            </div>
-
-                            <!-- Image Upload -->
-                            <div class="form-group">
-                                <label for="productImage">Product Image:</label>
-                                <input type="file" id="productImage" accept="image/*" onchange="previewImage(event)">
-                                <div class="image-preview" id="imagePreview">
-                                    <p>No image selected</p>
-                                </div>
-                            </div>
-
-                            <button type="submit" class="submit-btn">Update</button>
-                        </form>
-                    </div>
-                </div>
+                @include('partials.AddModel')
+                @include('partials.EditModel')
+                @include('partials.ProductStatusModel')
 
 
 
 
-            <!-- Status Update Modal -->
-            <div id="statusModal" class="modal">
-                <div class="modal-content">
-                    <span class="close-btn" onclick="closeStatusModal()">&times;</span>
-                    <h2 class="modal-title">Update Product Status</h2>
-                    <label for="statusSelect">Select Status:</label>
-                    <select id="statusSelect" class="status-dropdown">
-                        <option value="In Stock">In Stock</option>
-                        <option value="Out of Stock">Out of Stock</option>
-                        <option value="Discontinued">Discontinued</option>
-                    </select>
-                    <button class="update-btn" onclick="updateStatus()">Update</button>
-                </div>
-            </div>
-
-            <style>
-                /* Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background: white;
-    padding: 20px;
-    width: 400px;
-    border-radius: 12px;
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
-    text-align: center;
-    position: relative;
-}
-
-.close-btn {
-    position: absolute;
-    right: 15px;
-    top: 10px;
-    font-size: 22px;
-    cursor: pointer;
-    color: #777;
-}
-
-.close-btn:hover {
-    color: red;
-}
-
-/* Dropdown */
-.status-dropdown {
-    width: 100%;
-    padding: 8px;
-    margin: 10px 0;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-}
-
-/* Update Button */
-.update-btn {
-    background-color: #2563eb;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.update-btn:hover {
-    background-color: #1e50cc;
-}
-
-/* Status Badge Styles */
-.status-text {
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.status-text:hover {
-    opacity: 0.8;
-}
-
-            </style>
 
 
+                <style>
+                    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+    }
 
+    .modal-content {
+        background: white;
+        padding: 20px;
+        width: 400px;
+        border-radius: 12px;
+        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        position: relative;
+    }
+
+    .close-btn {
+        position: absolute;
+        right: 15px;
+        top: 10px;
+        font-size: 22px;
+        cursor: pointer;
+        color: #777;
+    }
+
+    .close-btn:hover {
+        color: red;
+    }
+
+    /* Dropdown */
+    .status-dropdown {
+        width: 100%;
+        padding: 8px;
+        margin: 10px 0;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+
+    /* Update Button */
+    .update-btn {
+        background-color: #2563eb;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .update-btn:hover {
+        background-color: #1e50cc;
+    }
+
+    /* Status Badge Styles */
+    .status-text {
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .status-text:hover {
+        opacity: 0.8;
+    }
+
+                </style>
 
                 <style>
 
@@ -389,38 +298,20 @@
                         document.getElementById("productModal").style.display = "flex";
                     }
 
-                    function OpenEditModel(){
-                        document.getElementById("EditProductModal").style.display = "flex";
-                    }
+
 
                     function closeModal() {
                         document.getElementById("productModal").style.display = "none";
                     }
-                    function closeEditModal() {
-                        document.getElementById("EditProductModal").style.display = "none";
-                    }
+
+
+
 
                     // Close modal if user clicks outside of it
                     window.onclick = function(event) {
                         let modal = document.getElementById("productModal");
                         if (event.target == modal) {
                             modal.style.display = "none";
-                        }
-                    }
-
-                    // Preview selected image
-                    function previewImage(event) {
-                        let preview = document.getElementById("imagePreview");
-                        let file = event.target.files[0];
-
-                        if (file) {
-                            let reader = new FileReader();
-                            reader.onload = function(e) {
-                                preview.innerHTML = `<img src="${e.target.result}" alt="Product Image">`;
-                            };
-                            reader.readAsDataURL(file);
-                        } else {
-                            preview.innerHTML = "<p>No image selected</p>";
                         }
                     }
 
@@ -493,22 +384,63 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+
+                                    @foreach($products as $product)
                                     <tr>
-                                        <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">001</td>
+                                        <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">{{$product->id}}</td>
+
+                                        @foreach ($product->images as $index => $image)
+                                        @if ($index === 0) <!-- Show only first image -->
+                                            <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark relative">
+                                                <img src="{{ asset($image->image_path) }}" alt="Product" class="h-12 w-12 rounded object-cover">
+
+                                                @if ($product->images->count() > 1)
+                                                    <button onclick="openCarousel({{ $product->id }})"
+                                                            class="absolute right-2 top-2 bg-gray-700 text-white p-1 rounded-full hover:bg-gray-800">
+                                                        ➡️
+                                                    </button>
+                                                @endif
+                                            </td>
+
+                                            <!-- Modal for Carousel -->
+                                            <div id="carouselModal-{{ $product->id }}" class="hidden fixed inset-0 flex items-center justify-center backdrop-blur-md bg-black/30">
+                                                <div class="bg-white p-5 rounded-lg shadow-lg relative w-[400px] h-[400px] flex flex-col items-center justify-center">
+                                                    <button onclick="closeCarousel({{ $product->id }})" class="absolute top-2 right-2 text-gray-700 text-2xl">
+                                                        &times;
+                                                    </button>
+
+                                                    <img id="carouselImage-{{ $product->id }}"
+                                                         src="{{ asset($image->image_path) }}"
+                                                         alt="Product Image"
+                                                         class="w-full h-full object-cover rounded-lg">
+
+                                                    <div class="flex justify-between mt-3 w-full px-5">
+                                                        <button onclick="prevImage({{ $product->id }})"
+                                                                class="px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-800">
+                                                            ⬅️ Prev
+                                                        </button>
+                                                        <button onclick="nextImage({{ $product->id }})"
+                                                                class="px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-800">
+                                                            Next ➡️
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @endforeach
+
+
                                         <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
-                                            <img src="product-image.jpg" alt="Product" class="h-12 w-12 rounded object-cover">
-                                        </td>
-                                        <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
-                                            <h5 class="font-medium text-black dark:text-white">Premium Coffee Beans</h5>
+                                            <h5 class="font-medium text-black dark:text-white">{{$product->name}}</h5>
                                         </td>
                                         <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark max-w-[300px]">
-                                            <p class="text-sm text-black dark:text-white truncate">Arabica coffee beans roasted to perfection, ideal for espresso brewing.</p>
+                                            <p class="text-sm text-black dark:text-white truncate">{{$product->description}}</p>
                                         </td>
                                         <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark text-right">
-                                            <p class="text-black dark:text-white">2,500.00</p>
+                                            <p class="text-black dark:text-white">{{$product->price}}</p>
                                         </td>
                                         <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
-                                            <p class="text-black dark:text-white">50</p>
+                                            <p class="text-black dark:text-white">{{$product->stock}}</p>
                                         </td>
                                         <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark" onclick="openStatusModal(this)">
                                             <p class="inline-flex rounded-full bg-success bg-opacity-10 px-3 py-1 text-sm font-medium text-success">
@@ -517,13 +449,16 @@
                                         </td>
                                         <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
                                             <div class="flex items-center space-x-3.5">
-                                                <button class="hover:text-primary" onclick="OpenEditModel()">
+
+                                                <button class="hover:text-primary" data-id="{{ $product->id }}" onclick=" OpenEditModel(this);">
                                                     <!-- Edit Icon -->
                                                     <svg class="fill-current" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M8.99981 14.8219C3.43106 14.8219 0.674805 9.50624 0.562305 9.28124C0.47793 9.11249 0.47793 8.88749 0.562305 8.71874C0.674805 8.49374 3.43106 3.20624 8.99981 3.20624C14.5686 3.20624 17.3248 8.49374 17.4373 8.71874C17.5217 8.88749 17.5217 9.11249 17.4373 9.28124C17.3248 9.50624 14.5686 14.8219 8.99981 14.8219ZM1.85605 8.99999C2.4748 10.0406 4.89356 13.5562 8.99981 13.5562C13.1061 13.5562 15.5248 10.0406 16.1436 8.99999C15.5248 7.95936 13.1061 4.44374 8.99981 4.44374C4.89356 4.44374 2.4748 7.95936 1.85605 8.99999Z" fill=""/>
-                                                        <path d="M9 11.3906C7.67812 11.3906 6.60938 10.3219 6.60938 9C6.60938 7.67813 7.67812 6.60938 9 6.60938C10.3219 6.60938 11.3906 7.67813 11.3906 9C11.3906 10.3219 10.3219 11.3906 9 11.3906ZM9 7.875C8.38125 7.875 7.875 8.38125 7.875 9C7.875 9.61875 8.38125 10.125 9 10.125C9.61875 10.125 10.125 9.61875 10.125 9C10.125 8.38125 9.61875 7.875 9 7.875Z" fill=""/>
+
+                                                      <path d="M8.99981 14.8219C3.43106 14.8219 0.674805 9.50624 0.562305 9.28124C0.47793 9.11249 0.47793 8.88749 0.562305 8.71874C0.674805 8.49374 3.43106 3.20624 8.99981 3.20624C14.5686 3.20624 17.3248 8.49374 17.4373 8.71874C17.5217 8.88749 17.5217 9.11249 17.4373 9.28124C17.3248 9.50624 14.5686 14.8219 8.99981 14.8219ZM1.85605 8.99999C2.4748 10.0406 4.89356 13.5562 8.99981 13.5562C13.1061 13.5562 15.5248 10.0406 16.1436 8.99999C15.5248 7.95936 13.1061 4.44374 8.99981 4.44374C4.89356 4.44374 2.4748 7.95936 1.85605 8.99999Z" fill=""/>
+                                                      <path d="M9 11.3906C7.67812 11.3906 6.60938 10.3219 6.60938 9C6.60938 7.67813 7.67812 6.60938 9 6.60938C10.3219 6.60938 11.3906 7.67813 11.3906 9C11.3906 10.3219 10.3219 11.3906 9 11.3906ZM9 7.875C8.38125 7.875 7.875 8.38125 7.875 9C7.875 9.61875 8.38125 10.125 9 10.125C9.61875 10.125 10.125 9.61875 10.125 9C10.125 8.38125 9.61875 7.875 9 7.875Z" fill=""/>
                                                     </svg>
                                                 </button>
+
                                                 <button class="hover:text-primary">
                                                     <!-- Delete Icon -->
                                                     <svg class="fill-current" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -535,37 +470,46 @@
                                         </td>
                                     </tr>
 
-                                    <!-- Additional Sample Row -->
-                                    <tr>
-                                        <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">002</td>
-                                        <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
-                                            <img src="product2.jpg" alt="Product" class="h-12 w-12 rounded object-cover">
-                                        </td>
-                                        <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
-                                            <h5 class="font-medium text-black dark:text-white">Organic Green Tea</h5>
-                                        </td>
-                                        <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark max-w-[300px]">
-                                            <p class="text-sm text-black dark:text-white truncate">Premium quality organic green tea leaves packed with antioxidants.</p>
-                                        </td>
-                                        <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark text-right">
-                                            <p class="text-black dark:text-white">1,800.00</p>
-                                        </td>
-                                        <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
-                                            <p class="text-black dark:text-white">0</p>
-                                        </td>
-                                        <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
-                                            <p class="inline-flex rounded-full bg-danger bg-opacity-10 px-3 py-1 text-sm font-medium text-danger">
-                                                Out of Stock
-                                            </p>
-                                        </td>
-                                        <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
-                                            <div class="flex items-center space-x-3.5">
-                                                <!-- Same action buttons as above -->
-                                            </div>
-                                        </td>
-                                    </tr>
+
+                                    @endforeach
+
+
+
+
+
                                 </tbody>
                             </table>
+
+                            <script>
+                                let productImages = @json($products->mapWithKeys(fn($product) => [$product->id => $product->images]));
+
+                                function openCarousel(productId) {
+                                    document.getElementById('carouselModal-' + productId).classList.remove('hidden');
+                                    updateImage(productId, 0);
+                                }
+
+                                function closeCarousel(productId) {
+                                    document.getElementById('carouselModal-' + productId).classList.add('hidden');
+                                }
+
+                                function updateImage(productId, index) {
+                                    let imageElement = document.getElementById('carouselImage-' + productId);
+                                    imageElement.src = '{{ asset('') }}' + productImages[productId][index].image_path;
+                                    imageElement.dataset.index = index;
+                                }
+
+                                function prevImage(productId) {
+                                    let currentIndex = parseInt(document.getElementById('carouselImage-' + productId).dataset.index);
+                                    let newIndex = (currentIndex > 0) ? currentIndex - 1 : productImages[productId].length - 1;
+                                    updateImage(productId, newIndex);
+                                }
+
+                                function nextImage(productId) {
+                                    let currentIndex = parseInt(document.getElementById('carouselImage-' + productId).dataset.index);
+                                    let newIndex = (currentIndex < productImages[productId].length - 1) ? currentIndex + 1 : 0;
+                                    updateImage(productId, newIndex);
+                                }
+                            </script>
                         </div>
                      </div>
                      <!-- ====== Table Three End -->
