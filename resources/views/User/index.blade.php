@@ -434,15 +434,7 @@
                                         <span class="badges">
                                                 <span class="new">New</span>
                                             </span>
-                                        <div class="actions">
-                                            <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                    class="pe-7s-like"></i></a>
-                                            <a href="#" class="action quickview" data-link-action="quickview"
-                                               title="Quick view" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModal"><i class="pe-7s-search"></i></a>
-                                            <a href="compare.html" class="action compare" title="Compare"><i
-                                                    class="pe-7s-refresh-2"></i></a>
-                                        </div>
+                                        
                                         <button title="Add To Cart" class=" add-to-cart">Add
                                             To Cart</button>
                                     </div>

@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
@@ -17,12 +17,12 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('country');
             $table->string('town');
-            $table->string('postcode')->nullable();
+            $table->string('postcode');
             $table->string('email');
             $table->string('phone');
             $table->string('street_address');
             $table->text('additional_note')->nullable();
-            $table->string('status')->default('pending'); // Order status (pending, shipped, completed, etc.)
+            $table->string('status')->default('Pending');
             $table->timestamps();
         });
     }

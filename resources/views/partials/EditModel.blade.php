@@ -3,40 +3,44 @@
         <span class="close-btn" onclick="closeEditModal()">&times;</span>
         <h3 class="modal-title">Edit Product</h3>
 
-        <form id="editProductForm">
-            <div class="form-group">
+        <form id="editProductForm" method="POST">
+            @csrf
+            @method('POST')
+            <input type="hidden" name="product_id" id="productId"> <!-- Hidden Product ID -->
+
+            <div class="form-group" style="margin-bottom:20px">
                 <label for="editProductName">Product Name:</label>
-                <input type="text" id="editProductName" placeholder="Enter product name" required>
+                <input type="text" id="editProductName" name="name" placeholder="Enter product name" required>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="margin-bottom:20px">
                 <label for="editPrice">Price (LKR):</label>
-                <input type="number" id="editPrice" placeholder="Enter price" required>
+                <input type="number" id="editPrice" name="price" placeholder="Enter price" required>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="margin-bottom:20px">
                 <label for="editStock">Stock:</label>
-                <input type="number" id="editStock" placeholder="Enter stock quantity" required>
+                <input type="number" id="editStock" name="stock" placeholder="Enter stock quantity" required>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="margin-bottom:20px">
                 <label for="editStatusSelect">Select Status:</label>
-                <select id="editStatusSelect" class="status-dropdown">
+                <select id="editStatusSelect" name="status" class="status-dropdown">
                     <option value="In Stock">In Stock</option>
                     <option value="Out of Stock">Out of Stock</option>
                     <option value="Discontinued">Discontinued</option>
                 </select>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="margin-bottom:20px">
                 <label for="editDescription">Description:</label>
-                <textarea id="editDescription" placeholder="Enter product description"></textarea>
+                <textarea id="editDescription" name="description" placeholder="Enter product description"></textarea>
             </div>
 
             <!-- Image Upload -->
-            <div class="form-group">
+            <div class="form-group" style="margin-bottom:20px">
                 <label for="editProductImage">Product Image:</label>
-                <input type="file" id="editProductImage" accept="image/*" multiple onchange="previewEditImages(event)">
+                <input type="file" id="editProductImage" name="images[]" accept="image/*" multiple onchange="previewEditImages(event)">
                 <div id="editImagePreviewContainer" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;"></div>
             </div>
 
@@ -44,171 +48,192 @@
         </form>
     </div>
 </div>
+
 <script>
-            function closeEditModal() {
-                let modal = document.getElementById("editProductModal");
-                modal.style.display = "none";
-            }
-            console.log("Close button clicked!");
+    // Function to close the edit modal
+function closeEditModal() {
+    document.getElementById("editProductModal").style.display = "none";
+}
 
+let removedImages = []; // Store removed image paths
 
+function OpenEditModel(button) {
+    document.getElementById("editProductModal").style.display = "flex";
+    const productId = button.getAttribute("data-id");
 
-      function OpenEditModel(button) {
-                    document.getElementById("editProductModal").style.display = "flex";
+    $.ajax({
+        url: `/products/edit/${productId}`,
+        type: 'GET',
+        success: function(response) {
+            if (response.status === "success" && response.data) {
+                const product = response.data;
+                document.getElementById("productId").value = product.id;
+                document.getElementById("editProductName").value = product.name;
+                document.getElementById("editPrice").value = product.price;
+                document.getElementById("editStock").value = product.stock;
+                document.getElementById("editDescription").value = product.description;
+                document.getElementById("editStatusSelect").value = product.status;
 
-                    let productId = button.getAttribute("data-id");
+                const previewContainer = document.getElementById("editImagePreviewContainer");
+                previewContainer.innerHTML = "";
+                removedImages = []; // Reset removed images
 
-                    $.ajax({
-                        url: '/products/edit/' + productId,
-                        type: 'GET',
-                    })
-                    .done(function(response) {
-                        console.log("Response:", response);
+                if (product.images && product.images.length > 0) {
+                    product.images.forEach(image => {
+                        const imageWrapper = document.createElement("div");
+                        imageWrapper.style.position = "relative";
+                        imageWrapper.style.display = "inline-block";
 
-                        if (response.status === "success" && response.data) {
-                            let product = response.data;
+                        const img = document.createElement("img");
+                        img.src = `/storage/${image.image_path}`;
+                        img.style.width = "120px";
+                        img.style.height = "120px";
+                        img.style.borderRadius = "8px";
+                        img.style.objectFit = "cover";
 
-                            document.getElementById("editProductName").value = product.name;
-                            document.getElementById("editPrice").value = product.price;
-                            document.getElementById("editStock").value = product.stock;
-                            document.getElementById("editDescription").value = product.description;
-                            document.getElementById("editStatusSelect").value = product.status;
+                        const removeBtn = document.createElement("button");
+                        removeBtn.innerHTML = "&times;";
+                        removeBtn.style.position = "absolute";
+                        removeBtn.style.top = "5px";
+                        removeBtn.style.right = "5px";
+                        removeBtn.style.background = "red";
+                        removeBtn.style.color = "white";
+                        removeBtn.style.border = "none";
+                        removeBtn.style.borderRadius = "50%";
+                        removeBtn.style.width = "20px";
+                        removeBtn.style.height = "20px";
+                        removeBtn.style.cursor = "pointer";
 
-                            // Clear previous images in preview container
-                            let previewContainer = document.getElementById("editImagePreviewContainer");
-                            previewContainer.innerHTML = "";
+                        // Remove image from preview and track it in removedImages
+                        removeBtn.onclick = function () {
+                            imageWrapper.remove();
+                            removedImages.push(image.image_path);
+                        };
 
-                            // Load existing images
-                            if (product.images && product.images.length > 0) {
-                                product.images.forEach(image => {
-                                    let imageWrapper = document.createElement("div");
-                                    imageWrapper.style.position = "relative";
-                                    imageWrapper.style.display = "inline-block";
-
-                                    let img = document.createElement("img");
-                                    img.src = image.image_path; // Assuming the image path is correct
-                                    img.style.maxWidth = "150px";
-                                    img.style.height = "150px";
-                                    img.style.borderRadius = "8px";
-                                    img.style.boxShadow = "0 4px 6px rgba(0,0,0,0.1)";
-                                    img.style.objectFit = "cover";
-
-                                    let removeBtn = document.createElement("button");
-                                    removeBtn.innerHTML = "&times;";
-                                    removeBtn.style.position = "absolute";
-                                    removeBtn.style.top = "5px";
-                                    removeBtn.style.right = "5px";
-                                    removeBtn.style.background = "red";
-                                    removeBtn.style.color = "white";
-                                    removeBtn.style.border = "none";
-                                    removeBtn.style.borderRadius = "50%";
-                                    removeBtn.style.width = "25px";
-                                    removeBtn.style.height = "25px";
-                                    removeBtn.style.cursor = "pointer";
-                                    removeBtn.style.fontSize = "16px";
-
-                                    removeBtn.onclick = function () {
-                                        imageWrapper.remove();
-                                    };
-
-                                    imageWrapper.appendChild(img);
-                                    imageWrapper.appendChild(removeBtn);
-                                    previewContainer.appendChild(imageWrapper);
-                                });
-                            }
-                        } else {
-                            console.error("Invalid response format.");
-                        }
-                    })
-                    .fail(function() {
-                        console.log("Error fetching product data.");
-                    })
-                    .always(function() {
-                        console.log("Request complete.");
+                        imageWrapper.appendChild(img);
+                        imageWrapper.appendChild(removeBtn);
+                        previewContainer.appendChild(imageWrapper);
                     });
                 }
+            } else {
+                console.error("Invalid response format.");
+            }
+        },
+        error: function() {
+            console.log("Error fetching product data.");
+        }
+    });
+}
 
 
-    function previewEditImages(event) {
-     let previewContainer = document.getElementById("editImagePreviewContainer");
-     previewContainer.innerHTML = ""; // Clear previous images
+// Function to preview images in the edit modal
+function previewEditImages(event) {
+    let previewContainer = document.getElementById("editImagePreviewContainer");
 
-     if (event.target.files.length > 0) {
-         for (let i = 0; i < event.target.files.length; i++) {
-             let reader = new FileReader();
-             let file = event.target.files[i];
+    // Don't clear existing images, only append new ones
+    if (event.target.files.length > 0) {
+        for (let i = 0; i < event.target.files.length; i++) {
+            let reader = new FileReader();
+            let file = event.target.files[i];
 
-             reader.onload = function () {
-                 let imageWrapper = document.createElement("div");
-                 imageWrapper.style.position = "relative";
-                 imageWrapper.style.display = "inline-block";
+            reader.onload = function () {
+                let imageWrapper = document.createElement("div");
+                imageWrapper.style.position = "relative";
+                imageWrapper.style.display = "inline-block";
 
-                 let img = document.createElement("img");
-                 img.src = reader.result;
-                 img.style.width = "120px";
-                 img.style.height = "120px";
-                 img.style.borderRadius = "8px";
-                 img.style.objectFit = "cover";
+                let img = document.createElement("img");
+                img.src = reader.result;
+                img.style.width = "120px";
+                img.style.height = "120px";
+                img.style.borderRadius = "8px";
+                img.style.objectFit = "cover";
 
-                 let removeBtn = document.createElement("button");
-                 removeBtn.innerHTML = "&times;";
-                 removeBtn.style.position = "absolute";
-                 removeBtn.style.top = "5px";
-                 removeBtn.style.right = "5px";
-                 removeBtn.style.background = "red";
-                 removeBtn.style.color = "white";
-                 removeBtn.style.border = "none";
-                 removeBtn.style.borderRadius = "50%";
-                 removeBtn.style.width = "20px";
-                 removeBtn.style.height = "20px";
-                 removeBtn.style.cursor = "pointer";
-                 removeBtn.onclick = function () {
-                     imageWrapper.remove();
-                 };
+                let removeBtn = document.createElement("button");
+                removeBtn.innerHTML = "&times;";
+                removeBtn.style.position = "absolute";
+                removeBtn.style.top = "5px";
+                removeBtn.style.right = "5px";
+                removeBtn.style.background = "red";
+                removeBtn.style.color = "white";
+                removeBtn.style.border = "none";
+                removeBtn.style.borderRadius = "50%";
+                removeBtn.style.width = "20px";
+                removeBtn.style.height = "20px";
+                removeBtn.style.cursor = "pointer";
+                removeBtn.onclick = function () {
+                    imageWrapper.remove();
+                };
 
-                 imageWrapper.appendChild(img);
-                 imageWrapper.appendChild(removeBtn);
-                 previewContainer.appendChild(imageWrapper);
-             };
+                imageWrapper.appendChild(img);
+                imageWrapper.appendChild(removeBtn);
+                previewContainer.appendChild(imageWrapper);
+            };
 
-             reader.readAsDataURL(file);
-         }
-     }
- }
-
- </script>
- <style>
-     #editImagePreviewContainer {
-         display: flex;
-         flex-wrap: nowrap; /* Ensures images stay in one row */
-         overflow-x: auto; /* Enables horizontal scrolling */
-         gap: 10px;
-         padding: 10px;
-         max-width: 100%; /* Ensures it fits within the modal */
-         white-space: nowrap;
-         border: 1px solid #ddd; /* Optional: Adds a border for visibility */
-         scrollbar-width: thin; /* Firefox */
-         scrollbar-color: #aaa #f1f1f1;
-     }
-
-     #editImagePreviewContainer::-webkit-scrollbar {
-         height: 8px;
-     }
-
-     #editImagePreviewContainer::-webkit-scrollbar-thumb {
-         background: #888;
-         border-radius: 4px;
-     }
-
-     #editImagePreviewContainer img {
-         max-width: 120px;
-         height: 120px;
-         border-radius: 8px;
-         object-fit: cover;
-         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-         flex-shrink: 0; /* Prevents images from shrinking */
-     }
+            reader.readAsDataURL(file);
+        }
+    }
+}
 
 
+// Form submission handler
+document.getElementById('editProductForm').addEventListener('submit', function(event) {
+    event.preventDefault(); 
 
- </style>
+    const formData = new FormData(this);
+    const productId = document.getElementById('productId').value;
+
+    // Append removed images to formData
+    formData.append("removed_images", JSON.stringify(removedImages));
+
+    $.ajax({
+        url: `/products/update/${productId}`,
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(response) {
+            if (response.status === 'success') {
+                alert('Product updated successfully!');
+                closeEditModal();
+            } else {
+                alert('Failed to update product. Please try again.');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Error updating product:", error);
+            alert('An error occurred while updating the product. Please check the console for details.');
+        }
+    });
+});
+
+</script>
+<style>
+    .sizes-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .sizes-grid div {
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+        background-color: #f9f9f9;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .sizes-grid label {
+        display: block;
+        margin-top: 5px;
+    }
+
+    .sizes-grid input[type="checkbox"] {
+        margin-right: 5px;
+    }
+</style>

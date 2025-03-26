@@ -248,22 +248,7 @@
     <!-- OffCanvas Menu End -->
 
 
-    <!-- breadcrumb-area start -->
-    <div class="breadcrumb-area">
-        <div class="container">
-            <div class="row align-items-center justify-content-center">
-                <div class="col-12 text-center">
-                    <h2 class="breadcrumb-title">Products</h2>
-                    <!-- breadcrumb-list start -->
-                    <ul class="breadcrumb-list">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item active">Products</li>
-                    </ul>
-                    <!-- breadcrumb-list end -->
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <!-- breadcrumb-area end -->
 
@@ -322,35 +307,27 @@
                                 <li class="old-price not-cut">$18.90</li>
                             </ul>
                         </div>
-                        <div class="pro-details-rating-wrap">
-                            <div class="rating-product">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <span class="read-review"><a class="reviews" href="#">( 5 Customer Review )</a></span>
+
+                        <!-- Size Selection Added -->
+                        <div class="pro-details-size mt-3">
+                            <span>Select Size: </span>
+                            <ul class="d-flex">
+                                <li><button class="size-option" onclick="selectSize('S')">S</button></li>
+                                <li><button class="size-option" onclick="selectSize('M')">M</button></li>
+                                <li><button class="size-option" onclick="selectSize('L')">L</button></li>
+                                <li><button class="size-option" onclick="selectSize('2XL')">2XL</button></li>
+                            </ul>
                         </div>
-                        <p class="mt-30px mb-0">Lorem ipsum dolor sit amet, consect adipisicing elit, sed do eiusmod tempor incidi ut labore
-                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercita ullamco laboris nisi
-                            ut aliquip ex ea commodo </p>
+
                         <div class="pro-details-quality">
                             <div class="cart-plus-minus">
                                 <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
                             </div>
                             <div class="pro-details-cart">
-                                <button class="add-cart" href="#"> Add To
-                                    Cart</button>
-                            </div>
-                            <div class="pro-details-compare-wishlist pro-details-wishlist ">
-                                <a href="wishlist.html"><i class="pe-7s-like"></i></a>
-                            </div>
-                            <div class="pro-details-compare-wishlist pro-details-compare">
-                                <a href="compare.html"><i class="pe-7s-refresh-2"></i></a>
+                                <button class="add-cart" href="#"> Add To Cart</button>
                             </div>
                         </div>
-                        <div class="pro-details-sku-info pro-details-same-style  d-flex">
+                        <div class="pro-details-sku-info pro-details-same-style d-flex">
                             <span>SKU: </span>
                             <ul class="d-flex">
                                 <li>
@@ -391,9 +368,50 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
+
+    <style>
+        .pro-details-size ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        gap: 10px;
+    }
+
+    .pro-details-size ul li {
+        display: inline-block;
+    }
+
+    .size-option {
+        background-color: #f5f5f5;
+        border: 1px solid #ccc;
+        padding: 5px 10px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .size-option:hover {
+        background-color: #e0e0e0;
+    }
+
+    .size-option.active {
+        background-color: #000;
+        color: #fff;
+    }
+
+    </style>
+    <script>
+        function selectSize(size) {
+            const sizeButtons = document.querySelectorAll('.size-option');
+            sizeButtons.forEach(button => button.classList.remove('active'));
+            event.target.classList.add('active');
+            console.log('Selected size:', size);
+        }
+
+    </script>
 
 
     <!-- product details description area start -->
