@@ -10,7 +10,7 @@
 
         <!-- Dropdown to select product status -->
         <label for="statusSelect">Select Status:</label>
-        <select id="statusSelect" class="status-dropdown">
+        <select id="statusSelectt" class="status-dropdown">
             <option id="inStock" value="In Stock">In Stock</option>
             <option id="outOfStock" value="Out of Stock">Out of Stock</option>
             <option id="discontinued" value="Discontinued">Discontinued</option>
@@ -75,8 +75,11 @@ function closeStatusModal() {
 // Function to update product status
 function updateProductStatus() {
     const productId = document.getElementById("productId").value;
-    const status = document.getElementById("statusSelect").value;
+    const status = document.getElementById("statusSelectt").value;
 
+    // Log the selected status to confirm what is being sent
+    console.log("User selected status:", status);  // This logs the selected status
+    
     // Make an AJAX request to update the product status
     $.ajax({
         url: `/products/update/status/${productId}`,

@@ -128,22 +128,30 @@ class ProductController extends Controller
 
                 public function updateStatus(Request $request, $id)
                 {
+                    // Find the product by ID
                     $product = Product::find($id);
+
+                    // Log the product data to check if it's being fetched correctly
+                    Log::info('Product data:', ['product' => $product]);
 
                     if (!$product) {
                         return response()->json(['status' => 'error', 'message' => 'Product not found.']);
                     }
 
+                    // Log the status from the request to verify what was passed
+                    Log::info('Product status to be updated:', ['status' => $request->input('status')]);
+
                     // Update the product status
                     $product->status = $request->input('status');
                     $product->save();
+
+                    // Log the updated product data to verify the status change
+                    Log::info('Updated Product data:', ['product' => $product]);
 
                     return response()->json(['status' => 'success', 'message' => 'Product status updated successfully.']);
                 }
 
                 
-
-
             public function destroy($id)
                 {
                     $product = Product::findOrFail($id);

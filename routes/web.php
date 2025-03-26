@@ -30,6 +30,7 @@ Route::post('/products/update/status/{id}', [ProductController::class, 'updateSt
 
 
 
+
 Route::get('/Order-management' , [OrderController::class , 'index'])->name('Order-management');
 
 
