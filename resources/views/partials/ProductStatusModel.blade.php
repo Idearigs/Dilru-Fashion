@@ -78,7 +78,7 @@ function updateProductStatus() {
     const status = document.getElementById("statusSelectt").value;
 
     // Log the selected status to confirm what is being sent
-    console.log("User selected status:", status);  // This logs the selected status
+   
     
     // Make an AJAX request to update the product status
     $.ajax({
@@ -90,17 +90,33 @@ function updateProductStatus() {
         },
         success: function(response) {
             if (response.status === 'success') {
-                alert('Product status updated successfully!');
                 closeStatusModal();
-                // Optionally refresh the page or update the UI with the new status
-                location.reload(); // Or update the status directly in the DOM
+
+                Swal.fire({
+                    title: "Success!",
+                    text: "Product Status Updated successfully.",
+                    icon: "success",
+                    confirmButtonText: "OK",
+                    confirmButtonColor: "#28a745" 
+                }).then(() => {
+                    location.reload(); // Reload the page AFTER user clicks "OK"
+                });
+
             } else {
-                alert('Failed to update product status. Please try again.');
+                Swal.fire("Error", "Failed to update product status. Please try again.", "error");
             }
         },
+
         error: function(xhr, status, error) {
             console.error("Error updating product status:", error);
-            alert('An error occurred while updating the product status. Please check the console for details.');
+
+            Swal.fire({
+                title: "Error!",
+                text: "An error occurred while updating the product status. Please try again.",
+                icon: "error",
+                confirmButtonText: "OK",
+                confirmButtonColor: "#d33" 
+            });
         }
     });
 }

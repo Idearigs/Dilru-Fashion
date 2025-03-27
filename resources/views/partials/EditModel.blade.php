@@ -196,15 +196,35 @@ document.getElementById('editProductForm').addEventListener('submit', function(e
         },
         success: function(response) {
             if (response.status === 'success') {
-                alert('Product updated successfully!');
+                Swal.fire({
+                    title: "Success!",
+                    text: "Product Updated successfully.",
+                    icon: "success",
+                    confirmButtonText: "OK",
+                    confirmButtonColor: "#28a745" 
+                }).then(() => {
+                    // Reload after user clicks OK
+                    location.reload();
+                });
+
                 closeEditModal();
             } else {
-                alert('Failed to update product. Please try again.');
+                Swal.fire({
+                    title: "Error!",
+                    text: "Failed to update product. Please try again.",
+                    icon: "error",
+                    confirmButtonText: "OK"
+                });
             }
         },
         error: function(xhr, status, error) {
-            console.error("Error updating product:", error);
-            alert('An error occurred while updating the product. Please check the console for details.');
+            Swal.fire({
+                title: "Error!",
+                text: "An error occurred while updating the product. Please check the console for details.",
+                icon: "error",
+                confirmButtonText: "OK",
+                confirmButtonColor: "#d33" 
+            });
         }
     });
 });

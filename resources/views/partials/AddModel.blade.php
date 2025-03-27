@@ -98,7 +98,27 @@
             }
         }
     }
+
+    
+
 </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let successMessage = "{{ session('success') }}";
+
+        if (successMessage.trim() === "store") {
+            Swal.fire({
+                title: "Success!",
+                text: "Product added successfully.",
+                icon: "success",
+                confirmButtonText: "OK",
+                confirmButtonColor: "#28a745"
+            });
+        }
+    });
+</script>
+
 
 <style>
     .modal-content {

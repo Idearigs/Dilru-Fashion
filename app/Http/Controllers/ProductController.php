@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\product;
 use App\Models\productImage;
 use App\Models\ProductSize;
+use GuzzleHttp\Psr7\Message;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -62,7 +63,8 @@ class ProductController extends Controller
                     DB::commit(); // Commit transaction
                     Log::info('Transaction committed successfully.');
 
-                    return redirect()->route('Admin')->with('success', 'Product created successfully.');
+                    return redirect()->route('Admin')->with('success', 'store');
+
                 } catch (\Exception $e) {
                     DB::rollBack(); // Rollback if error
                     Log::error('Error saving product', ['error' => $e->getMessage()]);
@@ -123,7 +125,7 @@ class ProductController extends Controller
                         }
                     }
                 
-                    return response()->json(['status' => 'success']);
+                    return response()->json(['status' => 'success' , 'message' => 'updated' ]);
                 }
 
                 public function updateStatus(Request $request, $id)

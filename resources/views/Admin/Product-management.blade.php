@@ -12,6 +12,8 @@
       <meta name="csrf-token" content="{{ csrf_token() }}">
       <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}" />
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
    </head>
    <body
       x-data="{ page: 'tables', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
@@ -20,24 +22,22 @@
       $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
       :class="{'dark text-bodydark bg-boxdark-2': darkMode === true}"
       >
-      <!-- ===== Preloader Start ===== -->
+
       <div
          x-show="loaded"
          x-init="window.addEventListener('DOMContentLoaded', () => {setTimeout(() => loaded = false, 500)})"
          class="fixed left-0 top-0 z-999999 flex h-screen w-screen items-center justify-center bg-white dark:bg-black"
          >
       </div>
-      <!-- ===== Preloader End ===== -->
-      <!-- ===== Page Wrapper Start ===== -->
+
       <div class="flex h-screen overflow-hidden">
-         <!-- ===== Sidebar Start ===== -->
+
          @include('partials.sidebar')
-         <!-- ===== Sidebar End ===== -->
-         <!-- ===== Content Area Start ===== -->
+      
          <div
             class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden"
             >
-            <!-- ===== Header Start ===== -->
+        
             <header
                class="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none"
                >
@@ -46,8 +46,9 @@
                   >
                </div>
             </header>
-            <!-- ===== Header End ===== -->
-            <!-- ===== Main Content Start ===== -->
+
+
+           
             <main>
                <div class="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
                   <!-- Breadcrumb Start -->
@@ -277,55 +278,58 @@
                      
                   </script>
                   <!-- Custom Modal for Confirmation -->
-                  <div id="deleteModal" class="modal-overlay">
-                     <div class="modal-content">
-                        <h2>Confirm Delete</h2>
-                        <p>Are you sure you want to delete this product? This action cannot be undone.</p>
-                        <div class="modal-actions">
-                           <button onclick="closeModal()" class="modal-button">Cancel</button>
-                           <button onclick="deleteProduct()" class="modal-button delete-confirm">Yes, Delete</button>
-                        </div>
-                     </div>
-                  </div>
+                  
                   <script>
-                     let productIdToDelete = null;
-                     
-                         // Open Modal and Set Product ID
-                         function confirmDelete(button) {
-                             productIdToDelete = button.getAttribute('data-id');
-                             document.getElementById('deleteModal').style.display = 'flex';
-                         }
-                     
-                         // Close Modal
-                         function closeModal() {
-                             productIdToDelete = null;
-                             document.getElementById('deleteModal').style.display = 'none';
-                         }
-                     
-                         // Confirm and Proceed to Delete
-                         function deleteProduct() {
-                             if (productIdToDelete) {
-                                 fetch(`/products/${productIdToDelete}/delete`, {
-                                     method: 'DELETE',
-                                     headers: {
-                                         'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                                         'Content-Type': 'application/json'
-                                     }
-                                 })
-                                 .then(response => response.json())
-                                 .then(data => {
-                                     if (data.success) {
-                                         location.reload();  // Reload to reflect changes
-                                     } else {
-                                         alert('Error: Could not delete product.');
-                                     }
-                                 })
-                                 .catch(error => {
-                                     console.error('Error:', error);
-                                     alert('Error: Something went wrong.');
+                     function confirmDelete(button) {
+                        let productIdToDelete = button.getAttribute('data-id');
+
+                        Swal.fire({
+                           title: "Are you sure?",
+                           text: "This action cannot be undone!",
+                           icon: "warning",
+                           showCancelButton: true,
+                           confirmButtonColor: "#d33",
+                           cancelButtonColor: "#3085d6",
+                           confirmButtonText: "Yes, Delete",
+                           cancelButtonText: "Cancel"
+                        }).then((result) => {
+                           if (result.isConfirmed) {
+                                 deleteProduct(productIdToDelete);
+                           }
+                        });
+                     }
+
+                     function deleteProduct(productId) {
+                        fetch(`/products/${productId}/delete`, {
+                           method: 'DELETE',
+                           headers: {
+                                 'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                                 'Content-Type': 'application/json'
+                           }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                           if (data.success) {
+                                 Swal.fire({
+                                    title: "Deleted!",
+                                    text: "Product has been deleted successfully.",
+                                    icon: "success",
+                                    confirmButtonText: "OK",
+                                    confirmButtonColor: "#28a745" 
+                                 }).then(() => {
+                                    location.reload();  // Reload the page to reflect changes
                                  });
-                             }
-                         }
+                           } else {
+                                 Swal.fire("Error", "Could not delete product.", "error");
+                              
+                           }
+                        })
+                        .catch(error => {
+                           console.error('Error:', error);
+                           Swal.fire("Error", "Something went wrong.", "error");
+                        });
+                     }
+
                      
                   </script>
                   <!-- Breadcrumb End -->
@@ -484,7 +488,7 @@
                   <!-- ====== Table Section End -->
                </div>
             </main>
-            <!-- ===== Main Content End ===== -->
+
          </div>
          <!-- ===== Content Area End ===== -->
       </div>
