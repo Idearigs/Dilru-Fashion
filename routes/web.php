@@ -8,6 +8,7 @@ use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 
 Route::get('/' , [FrontendController::class, 'index'])->name('Frontend-Home');
 Route::get('/Checkout' , [FrontendController::class, 'CheckoutPage'])->name('Frontend-Checkoutpage');
@@ -29,8 +30,17 @@ Route::delete('/products/{id}/delete', [ProductController::class, 'destroy'])->n
 Route::post('/products/update/status/{id}', [ProductController::class, 'updateStatus']);
 
 
+//User managment
+Route::get('User-manamgemnt' , [UserController::class ,  'index'])->name('User-management');
+Route::post('/User/add' , [UserController::class , 'AddUser'])->name('add-user');
+Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+Route::post('/users/{id}', [UserController::class, 'update'])->name('user.update');
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('user.delete');
 
 
+
+
+//Order managment
 Route::get('/Order-management' , [OrderController::class , 'index'])->name('Order-management');
 
 

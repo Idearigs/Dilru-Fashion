@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>User Management | Admin Dashboard</title>
+      <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}" />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   </head>
+   <body
+      x-data="{ page: 'tables', 'loaded': true, 'darkMode': true, 'sidebarToggle': false, 'scrollTop': false }"
+      x-init="
+      darkMode = JSON.parse(localStorage.getItem('darkMode'));
+      $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
+      :class="{'dark text-bodydark bg-boxdark-2': darkMode === true}"
+   >
+            @if(session('success'))
+            <script>
+                Swal.fire({
+                    title: "Success!",
+                    text: "{{ session('success') }}",
+                    icon: "success",
+                    confirmButtonText: "OK",
+                    confirmButtonColor: "#3085d6"
+                });
+            </script>
+            @endif
+
+      <div class="flex h-screen overflow-hidden">
+         @include('partials.sidebar')
+         <div class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
+            <header class="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
+               <div class="flex flex-grow items-center justify-between px-4 py-4 shadow-2 md:px-6 2xl:px-11">
+               </div>
+            </header>
+            <main>
+               <div class="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
+                  <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                     <h2 class="text-title-md2 font-bold text-black dark:text-white">User Management</h2>
+                     <nav>
+                        <ol class="flex items-center gap-2">
+                           <li><a class="font-medium" href="index.html">Dashboard /</a></li>
+                           <li class="font-medium text-primary">User Management</li>
+                        </ol>
+                     </nav>
+                  </div>
+
+                  <!-- Add User Button -->
+                  <div class="mb-4">
+                    <button class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"  style="background-color:rgb(19, 78, 240)" onclick="openAddUserModal()">Add User + </button>
+
+                  </div>
+                  <script>
+                     // Define the confirmDelete function
+                     function confirmDelete(userId) {
+                        
+
+                        // Use SweetAlert to confirm the delete action
+                        Swal.fire({
+                           title: 'Are you sure?',
+                           text: "You won't be able to revert this!",
+                           icon: 'warning',
+                           showCancelButton: true,
+                           confirmButtonColor: '#3085d6',
+                           cancelButtonColor: '#d33',
+                           confirmButtonText: 'Yes, delete it!',
+                        }).then((result) => {
+                           if (result.isConfirmed) {
+                                 // Send the DELETE request via Ajax
+                                 $.ajax({
+                                    url: '/users/' + userId,  // The delete route
+                                    method: 'DELETE',         // Use DELETE method
+                                    data: {
+                                       _token: '{{ csrf_token() }}',  // CSRF token for security
+                                    },
+                                    success: function (response) {
+                                       // SweetAlert success message
+                                       Swal.fire(
+                                             'Deleted!',
+                                             'The user has been deleted.',
+                                             'success'
+                                       );
+
+                                       // Optionally, remove the user row from the table (if applicable)
+                                       $('button[data-id="' + userId + '"]').closest('tr').remove();
+                                    },
+                                    error: function (error) {
+                                       // SweetAlert error message
+                                       Swal.fire(
+                                             'Error!',
+                                             'There was an error deleting the user.',
+                                             'error'
+                                       );
+                                    }
+                                 });
+                           }
+                        });
+                     }
+
+                   </script>
+
+                  <!-- Table Section Start -->
+                  <div class="flex flex-col gap-10">
+                     <div class="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
+                        <div class="max-w-full overflow-x-auto">
+                           <table class="w-full table-auto">
+                              <thead>
+                                 <tr class="bg-gray-2 text-left dark:bg-meta-4">
+                                    <th class="w-[50px] px-4 py-4 font-medium text-black dark:text-white">ID</th>
+                                    <th class="min-w-[150px] px-4 py-4 font-medium text-black dark:text-white">Name</th>
+                                    <th class="min-w-[150px] px-4 py-4 font-medium text-black dark:text-white">Email</th>
+                                    <th class="min-w-[120px] px-4 py-4 font-medium text-black dark:text-white">Phone Number</th>
+                                    <th class="px-4 py-4 font-medium text-black dark:text-white">Actions</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <!-- Example Row -->
+                                 @foreach ($users as $user )
+                                 <tr>
+                                    <td class="px-4 py-4">{{ $user->id }}</td>
+                                    <td class="px-4 py-4">{{ $user->name }}</td>
+                                    <td class="px-4 py-4">{{ $user->email }}</td>
+                                    <td class="px-4 py-4">{{ $user->phone }}</td>
+                                    <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
+                                        <div class="flex items-center space-x-3.5">
+                                           <button class="hover:text-primary" data-id="{{ $user->id }}" onclick="OpenEditUserModel(this)">
+                                              <!-- Edit Icon -->
+                                              <svg class="fill-current" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                 <path d="M8.99981 14.8219C3.43106 14.8219 0.674805 9.50624 0.562305 9.28124C0.47793 9.11249 0.47793 8.88749 0.562305 8.71874C0.674805 8.49374 3.43106 3.20624 8.99981 3.20624C14.5686 3.20624 17.3248 8.49374 17.4373 8.71874C17.5217 8.88749 17.5217 9.11249 17.4373 9.28124C17.3248 9.50624 14.5686 14.8219 8.99981 14.8219ZM1.85605 8.99999C2.4748 10.0406 4.89356 13.5562 8.99981 13.5562C13.1061 13.5562 15.5248 10.0406 16.1436 8.99999C15.5248 7.95936 13.1061 4.44374 8.99981 4.44374C4.89356 4.44374 2.4748 7.95936 1.85605 8.99999Z" fill=""/>
+                                                 <path d="M9 11.3906C7.67812 11.3906 6.60938 10.3219 6.60938 9C6.60938 7.67813 7.67812 6.60938 9 6.60938C10.3219 6.60938 11.3906 7.67813 11.3906 9C11.3906 10.3219 10.3219 11.3906 9 11.3906ZM9 7.875C8.38125 7.875 7.875 8.38125 7.875 9C7.875 9.61875 8.38125 10.125 9 10.125C9.61875 10.125 10.125 9.61875 10.125 9C10.125 8.38125 9.61875 7.875 9 7.875Z" fill=""/>
+                                              </svg>
+                                           </button>
+                                           
+                                           <button class="delete-button hover:text-primary" data-id="{{ $user->id }}" onclick="confirmDelete({{ $user->id }})">
+                                              <!-- Delete Icon -->
+                                              <svg class="fill-current" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                 <path d="M13.7535 2.47502H11.5879V1.9969C11.5879 1.15315 10.9129 0.478149 10.0691 0.478149H7.90352C7.05977 0.478149 6.38477 1.15315 6.38477 1.9969V2.47502H4.21914C3.40352 2.47502 2.72852 3.15002 2.72852 3.96565V4.8094C2.72852 5.42815 3.09414 5.9344 3.62852 6.1594L4.07852 15.4688C4.13477 16.6219 5.09102 17.5219 6.24414 17.5219H11.7004C12.8535 17.5219 13.8098 16.6219 13.866 15.4688L14.3441 6.13127C14.8785 5.90627 15.2441 5.3719 15.2441 4.78127V3.93752C15.2441 3.15002 14.5691 2.47502 13.7535 2.47502ZM7.67852 1.9969C7.67852 1.85627 7.79102 1.74377 7.93164 1.74377H10.0973C10.2379 1.74377 10.3504 1.85627 10.3504 1.9969V2.47502H7.70664V1.9969H7.67852ZM4.02227 3.96565C4.02227 3.85315 4.10664 3.74065 4.24727 3.74065H13.7535C13.866 3.74065 13.9785 3.82502 13.9785 3.96565V4.8094C13.9785 4.9219 13.8941 5.0344 13.7535 5.0344H4.24727C4.13477 5.0344 4.02227 4.95002 4.02227 4.8094V3.96565ZM11.7285 16.2563H6.27227C5.79414 16.2563 5.40039 15.8906 5.37227 15.3844L4.95039 6.2719H13.0785L12.6566 15.3844C12.6004 15.8625 12.2066 16.2563 11.7285 16.2563Z" fill=""/>
+                                                 <path d="M9.00039 9.11255C8.66289 9.11255 8.35352 9.3938 8.35352 9.75942V13.3313C8.35352 13.6688 8.63477 13.9782 9.00039 13.9782C9.33789 13.9782 9.64727 13.6969 9.64727 13.3313V9.75942C9.64727 9.3938 9.33789 9.11255 9.00039 9.11255Z" fill=""/>
+                                              </svg>
+                                           </button>
+
+                                           
+                                        </div>
+                                     </td>
+                                 </tr>
+                                 @endforeach
+                                 
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- Table Section End -->
+               </div>
+            </main>
+         </div>
+      </div>
+
+      <!-- Add User Modal -->
+      @include('partials.AddUser')
+      @include('partials.EditUser')
+
+      <style>
+         /* Modal Styling */
+         .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+         }
+         /* Modal Content */
+         .modal-content {
+            background: white;
+            padding: 20px;
+            width: 500px;
+            border-radius: 12px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+            text-align: left;
+            position: relative;
+         }
+         /* Title */
+         .modal-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+         }
+         /* Close Button */
+         .close-btn {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            font-size: 22px;
+            cursor: pointer;
+            color: #777;
+         }
+         .close-btn:hover {
+            color: red;
+         }
+      </style>
+
+      <script>
+         function openAddUserModal() {
+            document.getElementById("addUserModal").style.display = "flex";
+         }
+
+         function closeAddUserModal() {
+            document.getElementById("addUserModal").style.display = "none";
+         }
+      </script>
+
+      <script defer src="{{ asset('assets/js/bundle.js') }}"></script>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+   </body>
+</html>
