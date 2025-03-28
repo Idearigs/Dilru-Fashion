@@ -52,28 +52,28 @@
         <div class="body customScroll">
             <ul class="minicart-product-list">
                 <li>
-                    <a href="{{Route('Frontend-ProductDetail')}}l" class="image"><img src="assets/images/product-image/1.jpg"
+                    <a href="#" class="image"><img src="assets/images/product-image/1.jpg"
                                                                      alt="Cart product Image"></a>
                     <div class="content">
-                        <a href="{{Route('Frontend-ProductDetail')}}l" class="title">Women's Elizabeth Coat</a>
+                        <a href="#" class="title">Women's Elizabeth Coat</a>
                         <span class="quantity-price">1 x <span class="amount">$21.86</span></span>
                         <a href="#" class="remove">×</a>
                     </div>
                 </li>
                 <li>
-                    <a href="{{Route('Frontend-ProductDetail')}}l" class="image"><img src="assets/images/product-image/2.jpg"
+                    <a href="#" class="image"><img src="assets/images/product-image/2.jpg"
                                                                      alt="Cart product Image"></a>
                     <div class="content">
-                        <a href="{{Route('Frontend-ProductDetail')}}l" class="title">Long sleeve knee length</a>
+                        <a href="#" class="title">Long sleeve knee length</a>
                         <span class="quantity-price">1 x <span class="amount">$13.28</span></span>
                         <a href="#" class="remove">×</a>
                     </div>
                 </li>
                 <li>
-                    <a href="{{Route('Frontend-ProductDetail')}}l" class="image"><img src="assets/images/product-image/3.jpg"
+                    <a href="#" class="image"><img src="assets/images/product-image/3.jpg"
                                                                      alt="Cart product Image"></a>
                     <div class="content">
-                        <a href="{{Route('Frontend-ProductDetail')}}l" class="title">Cool Man Wearing Leather</a>
+                        <a href="#" class="title">Cool Man Wearing Leather</a>
                         <span class="quantity-price">1 x <span class="amount">$17.34</span></span>
                         <a href="#" class="remove">×</a>
                     </div>
@@ -98,28 +98,28 @@
         <div class="body customScroll">
             <ul class="minicart-product-list">
                 <li>
-                    <a href="{{Route('Frontend-ProductDetail')}}l" class="image"><img src="assets/images/product-image/1.jpg"
+                    <a href="#" class="image"><img src="assets/images/product-image/1.jpg"
                                                                      alt="Cart product Image"></a>
                     <div class="content">
-                        <a href="{{Route('Frontend-ProductDetail')}}l" class="title">Women's Elizabeth Coat</a>
+                        <a href="#" class="title">Women's Elizabeth Coat</a>
                         <span class="quantity-price">1 x <span class="amount">$18.86</span></span>
                         <a href="#" class="remove">×</a>
                     </div>
                 </li>
                 <li>
-                    <a href="{{Route('Frontend-ProductDetail')}}l" class="image"><img src="assets/images/product-image/2.jpg"
+                    <a href="#" class="image"><img src="assets/images/product-image/2.jpg"
                                                                      alt="Cart product Image"></a>
                     <div class="content">
-                        <a href="{{Route('Frontend-ProductDetail')}}l" class="title">Long sleeve knee length</a>
+                        <a href="#" class="title">Long sleeve knee length</a>
                         <span class="quantity-price">1 x <span class="amount">$43.28</span></span>
                         <a href="#" class="remove">×</a>
                     </div>
                 </li>
                 <li>
-                    <a href="{{Route('Frontend-ProductDetail')}}l" class="image"><img src="assets/images/product-image/3.jpg"
+                    <a href="#" class="image"><img src="assets/images/product-image/3.jpg"
                                                                      alt="Cart product Image"></a>
                     <div class="content">
-                        <a href="{{Route('Frontend-ProductDetail')}}l" class="title">Cool Man Wearing Leather</a>
+                        <a href="#" class="title">Cool Man Wearing Leather</a>
                         <span class="quantity-price">1 x <span class="amount">$37.34</span></span>
                         <a href="#" class="remove">×</a>
                     </div>
@@ -167,7 +167,7 @@
                         <li>
                             <a href="#"><span class="menu-text">product Details Page</span></a>
                             <ul class="sub-menu">
-                                <li><a href="{{Route('Frontend-ProductDetail')}}l">Product Single</a></li>
+                                <li><a href="#">Product Single</a></li>
                                 <li><a href="single-product-variable.html">Product Variable</a></li>
                                 <li><a href="single-product-affiliate.html">Product Affiliate</a></li>
                                 <li><a href="single-product-group.html">Product Group</a></li>
@@ -421,330 +421,42 @@
                     <!-- 1st tab start -->
                     <div class="tab-pane fade show active" id="tab-product-all">
                         <div class="row">
-                            <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px" data-aos="fade-up"
-                                 data-aos-delay="200">
-                                <!-- Single Prodect -->
-                                <div class="product">
-                                    <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}" class="image">
-                                            <img src="assets/images/product-image/1.jpg" alt="Product" />
-                                            <img class="hover-image" src="assets/images/product-image/2.jpg"
-                                                 alt="Product" />
-                                        </a>
-                                        <span class="badges">
-                                                <span class="new">New</span>
-                                            </span>
-                                        
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                                </span>
-                                                <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Women's Elizabeth Coat
+                            @foreach($products as $product)
+                                <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px" data-aos="fade-up"
+                                     data-aos-delay="200">
+                                    <!-- Single Product -->
+                                    <div class="product">
+                                        <div class="thumb">
+                                            @foreach ($product->images as $index => $image)
+                                            @if ($index === 0)
+                                            <a href="{{ route('Frontend-ProductDetail', ['id' => $product->id]) }}" class="image">
+                                                <img src="{{ asset('storage/' . $image->image_path) }}" 
+                                                     alt="{{ $product->name }}" />
                                             </a>
-                                        </h5>
-                                        <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px" data-aos="fade-up"
-                                 data-aos-delay="400">
-                                <!-- Single Prodect -->
-                                <div class="product">
-                                    <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
-                                            <img src="assets/images/product-image/3.jpg" alt="Product" />
-                                            <img class="hover-image" src="assets/images/product-image/4.jpg"
-                                                 alt="Product" />
-                                        </a>
-                                        <span class="badges">
-                                                <span class="sale">-10%</span>
+                                            @endif
+                                            @endforeach
+                                            <span class="badges">
                                                 <span class="new">New</span>
                                             </span>
-                                        <div class="actions">
-                                            <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                    class="pe-7s-like"></i></a>
-                                            <a href="#" class="action quickview" data-link-action="quickview"
-                                               title="Quick view" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModal"><i class="pe-7s-search"></i></a>
-                                            <a href="compare.html" class="action compare" title="Compare"><i
-                                                    class="pe-7s-refresh-2"></i></a>
+                                            <button title="Add To Cart" class="add-to-cart">Add To Cart</button>
                                         </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 80%"></span>
-                                                </span>
-                                                <span class="rating-num">( 4 Review )</span>
+                                        <div class="content">
+                                            <h5 class="title">
+                                                <a href="{{ route('Frontend-ProductDetail', ['id' => $product->id]) }}">
+                                                    {{ $product->name }}
+                                                </a>
+                                            </h5>
+                                            <span class="price">
+                                                <span class="new">${{ number_format($product->price, 2) }}</span>
                                             </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Ardene Microfiber
-                                                Tights</a>
-                                        </h5>
-                                        <span class="price">
-                                                <span class="new">$38.50</span>
-                                                <span class="old">$48.50</span>
-                                            </span>
-                                    </div>
-                                </div>
-                                <!-- Single Prodect -->
-                            </div>
-                            <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px" data-aos="fade-up"
-                                 data-aos-delay="600">
-                                <!-- Single Prodect -->
-                                <div class="product">
-                                    <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
-                                            <img src="assets/images/product-image/5.jpg" alt="Product" />
-                                            <img class="hover-image" src="assets/images/product-image/6.jpg"
-                                                 alt="Product" />
-                                        </a>
-                                        <span class="badges">
-                                                <span class="sale">-7%</span>
-                                            </span>
-                                        <div class="actions">
-                                            <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                    class="pe-7s-like"></i></a>
-                                            <a href="#" class="action quickview" data-link-action="quickview"
-                                               title="Quick view" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModal"><i class="pe-7s-search"></i></a>
-                                            <a href="compare.html" class="action compare" title="Compare"><i
-                                                    class="pe-7s-refresh-2"></i></a>
                                         </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
                                     </div>
-                                    <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 90%"></span>
-                                                </span>
-                                                <span class="rating-num">( 4.5 Review )</span>
-                                            </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Women's Long Sleeve
-                                                Shirts</a></h5>
-                                        <span class="price">
-                                                <span class="new">$30.50</span>
-                                                <span class="old">$38.00</span>
-                                            </span>
-                                    </div>
+                                    
                                 </div>
-                            </div>
-                            <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px" data-aos="fade-up"
-                                 data-aos-delay="800">
-                                <!-- Single Prodect -->
-                                <div class="product">
-                                    <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
-                                            <img src="assets/images/product-image/7.jpg" alt="Product" />
-                                            <img class="hover-image" src="assets/images/product-image/8.jpg"
-                                                 alt="Product" />
-                                        </a>
-                                        <span class="badges">
-                                                <span class="new">Sale</span>
-                                            </span>
-                                        <div class="actions">
-                                            <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                    class="pe-7s-like"></i></a>
-                                            <a href="#" class="action quickview" data-link-action="quickview"
-                                               title="Quick view" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModal"><i class="pe-7s-search"></i></a>
-                                            <a href="compare.html" class="action compare" title="Compare"><i
-                                                    class="pe-7s-refresh-2"></i></a>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 70%"></span>
-                                                </span>
-                                                <span class="rating-num">( 3.5 Review )</span>
-                                            </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Parrera Sunglasses -
-                                                Lomashop</a></h5>
-                                        <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                    </div>
-                                </div>
-                                <!-- Single Prodect -->
-                            </div>
-                            <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-md-30px mb-lm-30px"
-                                 data-aos="fade-up" data-aos-delay="200">
-                                <!-- Single Prodect -->
-                                <div class="product">
-                                    <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
-                                            <img src="assets/images/product-image/2.jpg" alt="Product" />
-                                            <img class="hover-image" src="assets/images/product-image/10.jpg"
-                                                 alt="Product" />
-                                        </a>
-                                        <span class="badges">
-                                                <span class="sale">-5%</span>
-                                                <span class="new">New</span>
-                                            </span>
-                                        <div class="actions">
-                                            <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                    class="pe-7s-like"></i></a>
-                                            <a href="#" class="action quickview" data-link-action="quickview"
-                                               title="Quick view" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModal"><i class="pe-7s-search"></i></a>
-                                            <a href="compare.html" class="action compare" title="Compare"><i
-                                                    class="pe-7s-refresh-2"></i></a>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                                </span>
-                                                <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Cool Man Wearing
-                                                Leather</a></h5>
-                                        <span class="price">
-                                                <span class="new">$38.50</span>
-                                                <span class="old">$40.50</span>
-                                            </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6  mb-md-30px mb-lm-30px"
-                                 data-aos="fade-up" data-aos-delay="400">
-                                <!-- Single Prodect -->
-                                <div class="product">
-                                    <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
-                                            <img src="assets/images/product-image/4.jpg" alt="Product" />
-                                            <img class="hover-image" src="assets/images/product-image/12.jpg"
-                                                 alt="Product" />
-                                        </a>
-                                        <span class="badges">
-                                            </span>
-                                        <div class="actions">
-                                            <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                    class="pe-7s-like"></i></a>
-                                            <a href="#" class="action quickview" data-link-action="quickview"
-                                               title="Quick view" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModal"><i class="pe-7s-search"></i></a>
-                                            <a href="compare.html" class="action compare" title="Compare"><i
-                                                    class="pe-7s-refresh-2"></i></a>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 100%"></span>
-                                                </span>
-                                                <span class="rating-num">( 5 Review )</span>
-                                            </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Portrait Of A Young
-                                                Stylish</a>
-                                        </h5>
-                                        <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                    </div>
-                                </div>
-                                <!-- Single Prodect -->
-                            </div>
-                            <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-es-30px" data-aos="fade-up"
-                                 data-aos-delay="600">
-                                <!-- Single Prodect -->
-                                <div class="product">
-                                    <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
-                                            <img src="assets/images/product-image/6.jpg" alt="Product" />
-                                            <img class="hover-image" src="assets/images/product-image/14.jpg"
-                                                 alt="Product" />
-                                        </a>
-                                        <span class="badges">
-                                            </span>
-                                        <div class="actions">
-                                            <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                    class="pe-7s-like"></i></a>
-                                            <a href="#" class="action quickview" data-link-action="quickview"
-                                               title="Quick view" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModal"><i class="pe-7s-search"></i></a>
-                                            <a href="compare.html" class="action compare" title="Compare"><i
-                                                    class="pe-7s-refresh-2"></i></a>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 80%"></span>
-                                                </span>
-                                                <span class="rating-num">( 4 Review )</span>
-                                            </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Men's Fashion Leather
-                                                Bag</a></h5>
-                                        <span class="price">
-                                                <span class="new">$30.50</span>
-                                            </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 " data-aos="fade-up"
-                                 data-aos-delay="800">
-                                <!-- Single Prodect -->
-                                <div class="product">
-                                    <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
-                                            <img src="assets/images/product-image/8.jpg" alt="Product" />
-                                            <img class="hover-image" src="assets/images/product-image/16.jpg"
-                                                 alt="Product" />
-                                        </a>
-                                        <span class="badges">
-                                                <span class="new">Sale</span>
-                                            </span>
-                                        <div class="actions">
-                                            <a href="wishlist.html" class="action wishlist" title="Wishlist"><i
-                                                    class="pe-7s-like"></i></a>
-                                            <a href="#" class="action quickview" data-link-action="quickview"
-                                               title="Quick view" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModal"><i class="pe-7s-search"></i></a>
-                                            <a href="compare.html" class="action compare" title="Compare"><i
-                                                    class="pe-7s-refresh-2"></i></a>
-                                        </div>
-                                        <button title="Add To Cart" class=" add-to-cart">Add
-                                            To Cart</button>
-                                    </div>
-                                    <div class="content">
-                                            <span class="ratings">
-                                                <span class="rating-wrap">
-                                                    <span class="star" style="width: 60%"></span>
-                                                </span>
-                                                <span class="rating-num">( 3 Review )</span>
-                                            </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Long sleeve knee
-                                                length</a></h5>
-                                        <span class="price">
-                                                <span class="new">$38.50</span>
-                                            </span>
-                                    </div>
-                                </div>
-                                <!-- Single Prodect -->
-                            </div>
+                            @endforeach
                         </div>
                     </div>
+                    
                     <!-- 1st tab end -->
                     <!-- 2nd tab start -->
                     <div class="tab-pane fade" id="tab-product-new">
@@ -754,7 +466,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
+                                        <a href="#" class="image">
                                             <img src="assets/images/product-image/1.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/2.jpg"
                                                  alt="Product" />
@@ -781,7 +493,7 @@
                                                 </span>
                                                 <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Women's Elizabeth Coat
+                                        <h5 class="title"><a href="#">Women's Elizabeth Coat
                                             </a>
                                         </h5>
                                         <span class="price">
@@ -795,7 +507,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
+                                        <a href="#" class="image">
                                             <img src="assets/images/product-image/3.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/4.jpg"
                                                  alt="Product" />
@@ -823,7 +535,7 @@
                                                 </span>
                                                 <span class="rating-num">( 4 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Ardene Microfiber
+                                        <h5 class="title"><a href="#">Ardene Microfiber
                                                 Tights</a>
                                         </h5>
                                         <span class="price">
@@ -839,7 +551,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
+                                        <a href="#" class="image">
                                             <img src="assets/images/product-image/5.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/6.jpg"
                                                  alt="Product" />
@@ -866,7 +578,7 @@
                                                 </span>
                                                 <span class="rating-num">( 4.5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Women's Long Sleeve
+                                        <h5 class="title"><a href="#">Women's Long Sleeve
                                                 Shirts</a></h5>
                                         <span class="price">
                                                 <span class="new">$30.50</span>
@@ -880,7 +592,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
+                                        <a href="#" class="image">
                                             <img src="assets/images/product-image/7.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/8.jpg"
                                                  alt="Product" />
@@ -907,7 +619,7 @@
                                                 </span>
                                                 <span class="rating-num">( 3.5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Parrera Sunglasses -
+                                        <h5 class="title"><a href="#">Parrera Sunglasses -
                                                 Lomashop</a></h5>
                                         <span class="price">
                                                 <span class="new">$38.50</span>
@@ -921,7 +633,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
+                                        <a href="#" class="image">
                                             <img src="assets/images/product-image/2.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/10.jpg"
                                                  alt="Product" />
@@ -949,7 +661,7 @@
                                                 </span>
                                                 <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Cool Man Wearing
+                                        <h5 class="title"><a href="#">Cool Man Wearing
                                                 Leather</a></h5>
                                         <span class="price">
                                                 <span class="new">$38.50</span>
@@ -963,7 +675,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
+                                        <a href="#" class="image">
                                             <img src="assets/images/product-image/4.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/12.jpg"
                                                  alt="Product" />
@@ -989,7 +701,7 @@
                                                 </span>
                                                 <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Portrait Of A Young
+                                        <h5 class="title"><a href="#">Portrait Of A Young
                                                 Stylish</a>
                                         </h5>
                                         <span class="price">
@@ -1004,7 +716,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
+                                        <a href="#" class="image">
                                             <img src="assets/images/product-image/6.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/14.jpg"
                                                  alt="Product" />
@@ -1030,7 +742,7 @@
                                                 </span>
                                                 <span class="rating-num">( 4 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Men's Fashion Leather
+                                        <h5 class="title"><a href="#">Men's Fashion Leather
                                                 Bag</a></h5>
                                         <span class="price">
                                                 <span class="new">$30.50</span>
@@ -1043,7 +755,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
+                                        <a href="#" class="image">
                                             <img src="assets/images/product-image/8.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/16.jpg"
                                                  alt="Product" />
@@ -1070,7 +782,7 @@
                                                 </span>
                                                 <span class="rating-num">( 3 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Long sleeve knee
+                                        <h5 class="title"><a href="#">Long sleeve knee
                                                 length</a></h5>
                                         <span class="price">
                                                 <span class="new">$38.50</span>
@@ -1090,7 +802,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
+                                        <a href="#" class="image">
                                             <img src="assets/images/product-image/1.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/2.jpg"
                                                  alt="Product" />
@@ -1117,7 +829,7 @@
                                                 </span>
                                                 <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Women's Elizabeth Coat
+                                        <h5 class="title"><a href="#">Women's Elizabeth Coat
                                             </a>
                                         </h5>
                                         <span class="price">
@@ -1131,7 +843,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
+                                        <a href="#" class="image">
                                             <img src="assets/images/product-image/3.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/4.jpg"
                                                  alt="Product" />
@@ -1159,7 +871,7 @@
                                                 </span>
                                                 <span class="rating-num">( 4 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Ardene Microfiber
+                                        <h5 class="title"><a href="#">Ardene Microfiber
                                                 Tights</a>
                                         </h5>
                                         <span class="price">
@@ -1175,7 +887,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
+                                        <a href="#" class="image">
                                             <img src="assets/images/product-image/5.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/6.jpg"
                                                  alt="Product" />
@@ -1202,7 +914,7 @@
                                                 </span>
                                                 <span class="rating-num">( 4.5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Women's Long Sleeve
+                                        <h5 class="title"><a href="#">Women's Long Sleeve
                                                 Shirts</a></h5>
                                         <span class="price">
                                                 <span class="new">$30.50</span>
@@ -1216,7 +928,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
+                                        <a href="#" class="image">
                                             <img src="assets/images/product-image/7.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/8.jpg"
                                                  alt="Product" />
@@ -1243,7 +955,7 @@
                                                 </span>
                                                 <span class="rating-num">( 3.5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Parrera Sunglasses -
+                                        <h5 class="title"><a href="#">Parrera Sunglasses -
                                                 Lomashop</a></h5>
                                         <span class="price">
                                                 <span class="new">$38.50</span>
@@ -1257,7 +969,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
+                                        <a href="#" class="image">
                                             <img src="assets/images/product-image/2.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/10.jpg"
                                                  alt="Product" />
@@ -1285,7 +997,7 @@
                                                 </span>
                                                 <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Cool Man Wearing
+                                        <h5 class="title"><a href="#">Cool Man Wearing
                                                 Leather</a></h5>
                                         <span class="price">
                                                 <span class="new">$38.50</span>
@@ -1299,7 +1011,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
+                                        <a href="#" class="image">
                                             <img src="assets/images/product-image/4.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/12.jpg"
                                                  alt="Product" />
@@ -1325,7 +1037,7 @@
                                                 </span>
                                                 <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Portrait Of A Young
+                                        <h5 class="title"><a href="#">Portrait Of A Young
                                                 Stylish</a>
                                         </h5>
                                         <span class="price">
@@ -1340,7 +1052,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
+                                        <a href="#" class="image">
                                             <img src="assets/images/product-image/6.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/14.jpg"
                                                  alt="Product" />
@@ -1366,7 +1078,7 @@
                                                 </span>
                                                 <span class="rating-num">( 4 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Men's Fashion Leather
+                                        <h5 class="title"><a href="#">Men's Fashion Leather
                                                 Bag</a></h5>
                                         <span class="price">
                                                 <span class="new">$30.50</span>
@@ -1379,7 +1091,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
+                                        <a href="#" class="image">
                                             <img src="assets/images/product-image/8.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/16.jpg"
                                                  alt="Product" />
@@ -1406,7 +1118,7 @@
                                                 </span>
                                                 <span class="rating-num">( 3 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Long sleeve knee
+                                        <h5 class="title"><a href="#">Long sleeve knee
                                                 length</a></h5>
                                         <span class="price">
                                                 <span class="new">$38.50</span>
@@ -1426,7 +1138,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
+                                        <a href="#" class="image">
                                             <img src="assets/images/product-image/1.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/2.jpg"
                                                  alt="Product" />
@@ -1453,7 +1165,7 @@
                                                 </span>
                                                 <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Women's Elizabeth Coat
+                                        <h5 class="title"><a href="#">Women's Elizabeth Coat
                                             </a>
                                         </h5>
                                         <span class="price">
@@ -1467,7 +1179,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
+                                        <a href="#" class="image">
                                             <img src="assets/images/product-image/3.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/4.jpg"
                                                  alt="Product" />
@@ -1495,7 +1207,7 @@
                                                 </span>
                                                 <span class="rating-num">( 4 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Ardene Microfiber
+                                        <h5 class="title"><a href="#">Ardene Microfiber
                                                 Tights</a>
                                         </h5>
                                         <span class="price">
@@ -1511,7 +1223,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
+                                        <a href="#" class="image">
                                             <img src="assets/images/product-image/5.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/6.jpg"
                                                  alt="Product" />
@@ -1538,7 +1250,7 @@
                                                 </span>
                                                 <span class="rating-num">( 4.5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Women's Long Sleeve
+                                        <h5 class="title"><a href="#">Women's Long Sleeve
                                                 Shirts</a></h5>
                                         <span class="price">
                                                 <span class="new">$30.50</span>
@@ -1552,7 +1264,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
+                                        <a href="#" class="image">
                                             <img src="assets/images/product-image/7.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/8.jpg"
                                                  alt="Product" />
@@ -1579,7 +1291,7 @@
                                                 </span>
                                                 <span class="rating-num">( 3.5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Parrera Sunglasses -
+                                        <h5 class="title"><a href="#">Parrera Sunglasses -
                                                 Lomashop</a></h5>
                                         <span class="price">
                                                 <span class="new">$38.50</span>
@@ -1593,7 +1305,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
+                                        <a href="#" class="image">
                                             <img src="assets/images/product-image/2.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/10.jpg"
                                                  alt="Product" />
@@ -1621,7 +1333,7 @@
                                                 </span>
                                                 <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Cool Man Wearing
+                                        <h5 class="title"><a href="#">Cool Man Wearing
                                                 Leather</a></h5>
                                         <span class="price">
                                                 <span class="new">$38.50</span>
@@ -1635,7 +1347,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
+                                        <a href="#" class="image">
                                             <img src="assets/images/product-image/4.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/12.jpg"
                                                  alt="Product" />
@@ -1661,7 +1373,7 @@
                                                 </span>
                                                 <span class="rating-num">( 5 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Portrait Of A Young
+                                        <h5 class="title"><a href="#">Portrait Of A Young
                                                 Stylish</a>
                                         </h5>
                                         <span class="price">
@@ -1676,7 +1388,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
+                                        <a href="#" class="image">
                                             <img src="assets/images/product-image/6.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/14.jpg"
                                                  alt="Product" />
@@ -1702,7 +1414,7 @@
                                                 </span>
                                                 <span class="rating-num">( 4 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Men's Fashion Leather
+                                        <h5 class="title"><a href="#">Men's Fashion Leather
                                                 Bag</a></h5>
                                         <span class="price">
                                                 <span class="new">$30.50</span>
@@ -1715,7 +1427,7 @@
                                 <!-- Single Prodect -->
                                 <div class="product">
                                     <div class="thumb">
-                                        <a href="{{Route('Frontend-ProductDetail')}}l" class="image">
+                                        <a href="#" class="image">
                                             <img src="assets/images/product-image/8.jpg" alt="Product" />
                                             <img class="hover-image" src="assets/images/product-image/16.jpg"
                                                  alt="Product" />
@@ -1742,7 +1454,7 @@
                                                 </span>
                                                 <span class="rating-num">( 3 Review )</span>
                                             </span>
-                                        <h5 class="title"><a href="{{Route('Frontend-ProductDetail')}}l">Long sleeve knee
+                                        <h5 class="title"><a href="#">Long sleeve knee
                                                 length</a></h5>
                                         <span class="price">
                                                 <span class="new">$38.50</span>

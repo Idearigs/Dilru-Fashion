@@ -14,25 +14,34 @@ class AdminAuthController extends Controller
         return view('Admin.auth.login');
     }
 
-    public function login(Request $request)
+    // Handle Login Request
+     // Handle Login
+     public function login(Request $request)
+     {
+         $request->validate([
+             'email' => 'required|email',
+             'password' => 'required|min:6',
+         ]);
+ 
+         // Attempt to authenticate the user
+         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+             return redirect()->route('Admin'); // Redirect to Admin dashboard
+         }
+ 
+         return back()->withErrors(['email' => 'Invalid credentials.']);
+     }
+ 
+     public function logout(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|min:6',
-        ]);
+        Auth::logout(); // Logs out the admin
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
-            return redirect()->route('Admin')->with('success', 'Login successful!');
-        }
+        // Invalidate the session and regenerate CSRF token for security
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-        return back()->withErrors(['email' => 'Invalid credentials'])->withInput($request->only('email', 'remember'));
+        return redirect()->route('login'); // Redirect to login page
     }
 
-    public function logout()
-    {
-        Auth::logout();
-        return redirect()->route('admin.login')->with('success', 'Logged out successfully.');
-    }
 
 
 }

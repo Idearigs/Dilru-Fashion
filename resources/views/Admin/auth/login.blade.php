@@ -36,12 +36,7 @@
                 <input type="password" name="password" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" required>
             </div>
 
-            <div class="flex items-center justify-between mt-4">
-                <label class="inline-flex items-center">
-                    <input type="checkbox" name="remember" class="text-blue-500">
-                    <span class="ml-2 text-gray-600">Remember Me</span>
-                </label>
-            </div>
+            
 
             <button type="submit" class="w-full bg-blue-500 text-white py-2 mt-4 rounded-lg hover:bg-blue-600">Login</button>
         </form>

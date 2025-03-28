@@ -68,9 +68,13 @@
                 <ul class="flex flex-col gap-1.5">
                     <!-- Logout -->
                     <li>
+                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="hidden">
+                            @csrf
+                        </form>
                         <a
                             class="group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-                            href="/logout"
+                            href="#"
+                            onclick="document.getElementById('logout-form').submit();" 
                         >
                             <svg class="fill-current" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
