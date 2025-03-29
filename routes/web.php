@@ -20,7 +20,8 @@ Route::get('/Cart', [FrontendController::class , 'Cart'])->name('Frontend-Cart')
 // Route to add a product to the cart
 Route::post('/add-to-cart/{id}', [FrontendController::class, 'addToCart'])->name('add-to-cart');
 Route::get('/remove-from-cart/{id}', [FrontendController::class, 'removeFromCart'])->name('remove-from-cart');
-
+Route::post('/update-cart', [FrontendController::class, 'updateCart'])->name('update-cart');
+Route::post('/checkout', [OrderController::class, 'store'])->name('checkout.store');
 
 // Admin Authentication Routes
 Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('login');

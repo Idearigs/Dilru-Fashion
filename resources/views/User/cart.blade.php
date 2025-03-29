@@ -43,98 +43,9 @@
     <!-- Header Area End -->
      <div class="offcanvas-overlay"></div>
 
-    <!-- OffCanvas Wishlist Start -->
-    <div id="offcanvas-wishlist" class="offcanvas offcanvas-wishlist">
-        <div class="inner">
-            <div class="head">
-                <span class="title">Wishlist</span>
-                <button class="offcanvas-close">×</button>
-            </div>
-            <div class="body customScroll">
-                <ul class="minicart-product-list">
-                    <li>
-                        <a href="single-product.html" class="image"><img src="assets/images/product-image/1.jpg"
-                                alt="Cart product Image"></a>
-                        <div class="content">
-                            <a href="single-product.html" class="title">Women's Elizabeth Coat</a>
-                            <span class="quantity-price">1 x <span class="amount">$21.86</span></span>
-                            <a href="#" class="remove">×</a>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="single-product.html" class="image"><img src="assets/images/product-image/2.jpg"
-                                alt="Cart product Image"></a>
-                        <div class="content">
-                            <a href="single-product.html" class="title">Long sleeve knee length</a>
-                            <span class="quantity-price">1 x <span class="amount">$13.28</span></span>
-                            <a href="#" class="remove">×</a>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="single-product.html" class="image"><img src="assets/images/product-image/3.jpg"
-                                alt="Cart product Image"></a>
-                        <div class="content">
-                            <a href="single-product.html" class="title">Cool Man Wearing Leather</a>
-                            <span class="quantity-price">1 x <span class="amount">$17.34</span></span>
-                            <a href="#" class="remove">×</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="foot">
-                <div class="buttons">
-                    <a href="wishlist.html" class="btn btn-dark btn-hover-primary mt-30px">view wishlist</a>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- OffCanvas Wishlist End -->
     <!-- OffCanvas Cart Start -->
-    <div id="offcanvas-cart" class="offcanvas offcanvas-cart">
-        <div class="inner">
-            <div class="head">
-                <span class="title">Cart</span>
-                <button class="offcanvas-close">×</button>
-            </div>
-            <div class="body customScroll">
-                <ul class="minicart-product-list">
-                    <li>
-                        <a href="single-product.html" class="image"><img src="assets/images/product-image/1.jpg"
-                                alt="Cart product Image"></a>
-                        <div class="content">
-                            <a href="single-product.html" class="title">Women's Elizabeth Coat</a>
-                            <span class="quantity-price">1 x <span class="amount">$18.86</span></span>
-                            <a href="#" class="remove">×</a>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="single-product.html" class="image"><img src="assets/images/product-image/2.jpg"
-                                alt="Cart product Image"></a>
-                        <div class="content">
-                            <a href="single-product.html" class="title">Long sleeve knee length</a>
-                            <span class="quantity-price">1 x <span class="amount">$43.28</span></span>
-                            <a href="#" class="remove">×</a>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="single-product.html" class="image"><img src="assets/images/product-image/3.jpg"
-                                alt="Cart product Image"></a>
-                        <div class="content">
-                            <a href="single-product.html" class="title">Cool Man Wearing Leather</a>
-                            <span class="quantity-price">1 x <span class="amount">$37.34</span></span>
-                            <a href="#" class="remove">×</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="foot">
-                <div class="buttons mt-30px">
-                    <a href="cart.html" class="btn btn-dark btn-hover-primary mb-30px">view cart</a>
-                    <a href="checkout.html" class="btn btn-outline-dark current-btn">checkout</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('partials.cart-popup')
     <!-- OffCanvas Cart End -->
 
     <!-- OffCanvas Menu Start -->
@@ -275,7 +186,8 @@
             <h3 class="cart-page-title">Your cart items</h3>
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                    <form action="#">
+                    <form id="cart-form" method="POST">
+                        @csrf
                         <div class="table-content table-responsive cart-table-content">
                             <table>
                                 <thead>
@@ -289,40 +201,62 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @php
-                                        $cart = Session::get('cart', []);
-                                        $total = 0;
-                                    @endphp
-    
-                                    @foreach ($cart as $item)
+                                <form id="cart-form">
+                                    <tbody>
+                                        @php
+                                            $cart = Session::get('cart', []);
+                                            $total = 0;
+                                        @endphp
+                            
+                                        @foreach ($cart as $item)
                                         <tr>
                                             <td class="product-thumbnail">
                                                 <a href="#"><img class="img-responsive ml-15px"
                                                         src="{{ asset('storage/' . $item['image']) }}" alt="" /></a>
                                             </td>
-                                            <td class="product-name"><a href="#">{{ $item['name'] }}</a> </td>
-                                            <td class="product-name"><a href="#">{{ $item['size'] }}</a> </td>
-                                            <td class="product-price-cart"><span class="amount">${{ number_format($item['price'], 2) }}</span></td>
+                                            <td class="product-name"><a href="#">{{ $item['name'] }}</a></td>
+                            
+                                            <!-- Size Dropdown -->
+                                            <td class="product-size">
+                                                <select name="size[{{ $item['id'] }}]" class="size-update">
+                                                    @foreach (['S', 'M', 'L', 'XL', '2XL'] as $size)
+                                                        <option value="{{ $size }}" {{ $size == $item['size'] ? 'selected' : '' }}>
+                                                            {{ $size }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                            
+                                            <td class="product-price-cart">
+                                                <span class="amount">${{ number_format($item['price'], 2) }}</span>
+                                            </td>
+                            
                                             <td class="product-quantity">
                                                 <div class="cart-plus-minus">
-                                                    <input class="cart-plus-minus-box" type="number" name="qtybutton" value="{{ $item['quantity'] }}" min="1" />
+                                                    <input type="number" name="quantity[{{ $item['id'] }}]" class="quantity-update" 
+                                                        value="{{ $item['quantity'] }}" min="1" />
                                                 </div>
                                             </td>
+                            
                                             <td class="product-subtotal">
-                                                ${{ number_format($item['price'] * $item['quantity'], 2) }}
+                                                $<span class="subtotal" id="subtotal-{{ $item['id'] }}">
+                                                    {{ number_format($item['price'] * $item['quantity'], 2) }}
+                                                </span>
                                             </td>
+                            
                                             <td class="product-remove">
                                                 <a href="{{ route('remove-from-cart', $item['id']) }}"><i class="fa fa-times"></i></a>
                                             </td>
                                         </tr>
-                                        @php
-                                            $total += $item['price'] * $item['quantity'];
-                                        @endphp
-                                    @endforeach
-                                </tbody>
+                                        @endforeach
+                                    </tbody>
+                                </form>
+                            </table>
+                                </form>
                             </table>
                         </div>
+                       
+
     
                         <div class="row">
                             <div class="col-lg-12">
@@ -331,7 +265,7 @@
                                         <a href="{{ route('Frontend-Home') }}">Continue Shopping</a>
                                     </div>
                                     <div class="cart-clear">
-                                        <button type="submit">Clear Shopping cart</button>
+                                        <button type="button" id="update-cart-btn">Update Shopping Cart</button>
                                         <a href="{{ route('Frontend-Checkoutpage') }}" class="btn btn-outline-dark current-btn">Proceed to checkout</a>
                                     </div>
                                 </div>
@@ -342,7 +276,44 @@
             </div>
         </div>
     </div>
-    
+     <!-- jQuery for AJAX -->
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <script>
+         $(document).ready(function () {
+            $("#update-cart-btn").on("click", function () {
+                var formData = $("#cart-form").serialize(); // Serialize all input data
+                
+                $.ajax({
+                    url: "{{ route('update-cart') }}",
+                    method: "POST",
+                    data: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (response) {
+                        console.log("Update response:", response); // Debug logging
+                        if (response.success) {
+                            // Option 1: Reload the page
+                            window.location.reload();
+                            
+                            // Option 2: Update dynamically (if you prefer not to reload)
+                            /*
+                            $.each(response.updatedItems, function (id, item) {
+                                $("#subtotal-" + id).text(item.subtotal);
+                                // Update any other fields if needed
+                            });
+                            $("#cart-total").text(response.total);
+                            */
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Update error:", error);
+                    }
+                });
+            });
+        });
+     </script>
+
     <!-- Cart Area End -->
 
     <!-- Footer Area Start -->

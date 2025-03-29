@@ -113,6 +113,86 @@ class FrontendController extends Controller
     
         return back()->with('success', 'Product added to cart.');
     }
+
+
+    public function updateCart(Request $request)
+    {
+        Log::info('=== Starting Cart Update ===');
+        Log::info('Request data:', $request->all());
+    
+        // Retrieve current cart from session
+        $cart = Session::get('cart', []);
+        Log::info('Initial cart content:', $cart);
+    
+        $updatedItems = [];
+        
+        // Get all quantity and size updates
+        $quantities = $request->input('quantity', []);
+        $sizes = $request->input('size', []);
+        Log::info('Quantity updates:', $quantities);
+        Log::info('Size updates:', $sizes);
+    
+        foreach ($cart as $index => &$item) {
+            $itemId = $item['id'];
+            Log::info("Processing item ID: $itemId", [
+                'current_quantity' => $item['quantity'],
+                'current_size' => $item['size']
+            ]);
+    
+            // Update quantity if provided
+            if (isset($quantities[$itemId])) {
+                $newQuantity = max(1, (int) $quantities[$itemId]);
+                Log::info("Updating quantity for item $itemId", [
+                    'old_quantity' => $item['quantity'],
+                    'new_quantity' => $newQuantity
+                ]);
+                $item['quantity'] = $newQuantity;
+            }
+            
+            // Update size if provided
+            if (isset($sizes[$itemId])) {
+                Log::info("Updating size for item $itemId", [
+                    'old_size' => $item['size'],
+                    'new_size' => $sizes[$itemId]
+                ]);
+                $item['size'] = $sizes[$itemId];
+            }
+    
+            // Calculate subtotal for this item
+            $subtotal = $item['price'] * $item['quantity'];
+            $updatedItems[$itemId] = [
+                'subtotal' => number_format($subtotal, 2)
+            ];
+            
+            Log::info("Updated item details:", [
+                'id' => $itemId,
+                'final_quantity' => $item['quantity'],
+                'final_size' => $item['size'],
+                'subtotal' => $subtotal
+            ]);
+        }
+    
+        // Save updated cart to session
+        Session::put('cart', $cart);
+        Log::info('Updated cart content to be saved:', $cart);
+    
+        // Recalculate total cart value
+        $total = collect($cart)->sum(fn($item) => $item['price'] * $item['quantity']);
+        Log::info('Calculated new cart total:', ['total' => $total]);
+    
+        $response = [
+            'success' => true,
+            'updatedItems' => $updatedItems,
+            'total' => number_format($total, 2),
+            'cart' => $cart
+        ];
+    
+        Log::info('Final response being sent:', $response);
+        Log::info('=== Cart Update Completed ===');
+    
+        return response()->json($response);
+    }
+
     
     
 
