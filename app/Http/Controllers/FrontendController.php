@@ -55,46 +55,67 @@ class FrontendController extends Controller
 
 
 
-    public function addToCart($id)
+    public function addToCart(Request $request, $id)
     {
+        Log::info("Add to Cart initiated for Product ID: $id");
+    
         // Retrieve the product by its ID
         $product = Product::find($id);
     
         if (!$product) {
+            Log::error("Product not found: ID $id");
             return redirect()->route('Frontend-Home')->with('error', 'Product not found.');
         }
     
-        // Retrieve the current cart from the session, if it exists, or initialize an empty array
-        $cart = Session::get('cart', []);
+        Log::info("Product found: ", ['id' => $product->id, 'name' => $product->name, 'image' => $product->images]);
     
-        // Check if the product is already in the cart
-        $existingProduct = false;
+        // Retrieve size and quantity from the request
+        $size = $request->input('size', 'Default');
+        $quantity = max(1, (int) $request->input('quantity', 1));
+        Log::info("Selected Size: $size, Quantity: $quantity");
+    
+        // Retrieve the current cart from the session
+        $cart = Session::get('cart', []);
+        Log::info("Current Cart: ", $cart);
+    
+        // Get the first image's path (if images exist)
+        $imagePath = $product->images->isNotEmpty() ? $product->images->first()->image_path : 'default-image.jpg';
+    
+        Log::info("Product image path: $imagePath");
+    
+        // Check if the product with the same size is already in the cart
+        $productExists = false;
         foreach ($cart as &$item) {
-            if ($item['id'] === $id) {
-                // If the product exists, update the quantity
-                $item['quantity'] += 1;
-                $existingProduct = true;
+            if ($item['id'] == $id && $item['size'] == $size) {
+                Log::info("Product already in cart. Updating quantity.", ['id' => $id, 'size' => $size, 'existing_quantity' => $item['quantity']]);
+                $item['quantity'] += $quantity;
+                $productExists = true;
                 break;
             }
         }
     
         // If the product was not already in the cart, add it
-        if (!$existingProduct) {
+        if (!$productExists) {
+            Log::info("Adding new product to cart", ['id' => $id, 'size' => $size, 'quantity' => $quantity]);
             $cart[] = [
                 'id' => $product->id,
                 'name' => $product->name,
-                'image' => $product->image_path ?? 'default-image.jpg',  // Provide a fallback image
+                'image' => $imagePath, // Use the $imagePath variable we prepared
                 'price' => $product->price,
-                'quantity' => 1,
+                'quantity' => $quantity,
+                'size' => $size,
             ];
         }
     
         // Save the updated cart to the session
         Session::put('cart', $cart);
+        Log::info("Updated Cart: ", Session::get('cart')); // Add this line to verify the cart content
     
-        // Redirect back to the previous page with a success message
         return back()->with('success', 'Product added to cart.');
     }
+    
+    
+
     
     
 
@@ -114,7 +135,7 @@ class FrontendController extends Controller
         Session::put('cart', $cart);
 
         // Optionally return a success response or redirect
-        return redirect()->route('Frontend-Cart')->with('success', 'Product removed from cart.');
+        return back()->with('success');
     }
 
     

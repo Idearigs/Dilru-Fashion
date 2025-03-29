@@ -60,9 +60,7 @@
                             <div class="swiper-slide">
                                 <img class="img-responsive m-auto" src="{{ asset('storage/' . $image->image_path) }}" alt="Product Thumbnail">
                             </div>
-                        @endforeach
-                            
-                            
+                            @endforeach
                         </div>
                     </div>
                     <div class="swiper-container zoom-thumbs mt-3 mb-3">
@@ -71,8 +69,7 @@
                             <div class="swiper-slide">
                                 <img class="img-responsive m-auto" src="{{ asset('storage/' . $image->image_path) }}" alt="Product Thumbnail">
                             </div>
-                        @endforeach
-                            
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -81,32 +78,36 @@
                         <h2>{{ $products->name }}</h2>
                         <div class="pricing-meta">
                             <ul>
-                                <li class="old-price not-cut"> Rs {{ $products->price }}</li>
+                                <li class="old-price not-cut"> Rs <span id="total-price">{{ $products->price }}</span></li>
                             </ul>
                         </div>
-
-                        <!-- Size Selection Added -->
+    
+                        <!-- Size Selection -->
+                      <!-- Size Selection -->
                         <div class="pro-details-size mt-3">
                             <span>Select Size: </span>
-                            <ul class="d-flex">
-                                <li><button class="size-option" onclick="selectSize('S')">S</button></li>
-                                <li><button class="size-option" onclick="selectSize('M')">M</button></li>
-                                <li><button class="size-option" onclick="selectSize('L')">L</button></li>
-                                <li><button class="size-option" onclick="selectSize('2XL')">2XL</button></li>
+                            <ul class="d-flex" id="size-options">
+                                <li><button type="button" class="size-option" data-size="S">S</button></li>
+                                <li><button type="button" class="size-option" data-size="M">M</button></li>
+                                <li><button type="button" class="size-option" data-size="L">L</button></li>
+                                <li><button type="button" class="size-option" data-size="2XL">2XL</button></li>
                             </ul>
                         </div>
 
-                        <div class="pro-details-quality">
-                            <div class="cart-plus-minus">
-                                <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
+                        <!-- Add To Cart Form -->
+                        <form action="{{ route('add-to-cart', $products->id) }}" method="POST" id="add-to-cart-form">
+                            @csrf
+                            <input type="hidden" name="size" id="selected-size" value="">
+                            <div class="pro-details-quality">
+                                <div class="cart-plus-minus">
+                                    <input class="cart-plus-minus-box" type="number" name="quantity" id="quantity" value="1" min="1" />
+                                </div>
+                                <div class="pro-details-cart">
+                                    <button type="submit" class="add-cart"> Add To Cart</button>
+                                </div>
                             </div>
-                            <div class="pro-details-cart">
-                                <form action="{{ route('add-to-cart', $products->id) }}" method="POST">
-                                @csrf
-                                <button class="add-cart" > Add To Cart</button>
-                            </form>
-                            </div>
-                        </div>
+                        </form>
+                            
                         <div class="pro-details-sku-info pro-details-same-style d-flex">
                             <span>SKU: </span>
                             <ul class="d-flex">
@@ -126,15 +127,63 @@
                                 </li>
                             </ul>
                         </div>
-                       
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let selectedSize = "";
+            const sizeButtons = document.querySelectorAll(".size-option");
+            const sizeInput = document.getElementById("selected-size");
+            const addToCartForm = document.getElementById("add-to-cart-form");
+    
+            // Handle size selection
+            sizeButtons.forEach(button => {
+                button.addEventListener("click", function () {
+                    selectedSize = this.getAttribute("data-size");
+                    sizeInput.value = selectedSize;
+    
+                    // Remove active class from all buttons
+                    sizeButtons.forEach(btn => btn.classList.remove("selected"));
+                    // Add active class to the clicked button
+                    this.classList.add("selected");
+    
+                  
+                });
+            });
+    
+            // Validate before submitting
+            addToCartForm.addEventListener("submit", function (event) {
+                if (sizeInput.value === "") {
+                    alert("Please select a size before adding to cart.");
+                    event.preventDefault();
+                }
+            });
+    
+            // Update total price based on quantity
+            document.getElementById("quantity").addEventListener("input", function () {
+                let quantity = parseInt(this.value);
+                let pricePerUnit = {{ $products->price }};
+                let totalPrice = pricePerUnit * quantity;
+                document.getElementById("total-price").innerText = totalPrice.toFixed(2);
+            });
+        });
+    </script>
+    
+    
 
     <style>
+        .size-option.selected {
+            background-color: #007bff;
+            color: white;
+            border: 2px solid #0056b3;
+            
+        },
+
+
         .pro-details-size ul {
         list-style: none;
         padding: 0;

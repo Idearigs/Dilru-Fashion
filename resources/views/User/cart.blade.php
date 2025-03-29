@@ -282,6 +282,7 @@
                                     <tr>
                                         <th>Image</th>
                                         <th>Product Name</th>
+                                        <th>Size</th>
                                         <th>Unit Price</th>
                                         <th>Qty</th>
                                         <th>Subtotal</th>
@@ -300,7 +301,8 @@
                                                 <a href="#"><img class="img-responsive ml-15px"
                                                         src="{{ asset('storage/' . $item['image']) }}" alt="" /></a>
                                             </td>
-                                            <td class="product-name"><a href="#">{{ $item['name'] }}</a></td>
+                                            <td class="product-name"><a href="#">{{ $item['name'] }}</a> </td>
+                                            <td class="product-name"><a href="#">{{ $item['size'] }}</a> </td>
                                             <td class="product-price-cart"><span class="amount">${{ number_format($item['price'], 2) }}</span></td>
                                             <td class="product-quantity">
                                                 <div class="cart-plus-minus">
